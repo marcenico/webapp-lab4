@@ -1,0 +1,42 @@
+<div class="center-this" >
+
+  <ng-container *ngIf="!isLooged; else loginTemplate">
+    <form>
+      <b>Registro</b><br><br>
+      <div class="form-group">
+        <label for="nombreSU">Nombre</label>
+        <input class="form-control" id="nombreSU" placeholder="Ingrese su nombre">
+      </div>
+      <div class="form-group">
+        <label for="emailSU">Email</label>
+        <input type="email" class="form-control" id="emailSU" aria-describedby="emailHelp" placeholder="Ingrese email">
+        <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small><!-->
+        </div>
+        <div class="form-group">
+          <label for="passwordSU">Password</label>
+          <input type="password" class="form-control" id="passwordSU" placeholder="Ingrese una contraseña">
+        </div>
+        <button type="submit" class="btn btn-primary">Regritarse</button>
+      </form>
+    </ng-container>
+    
+    <ng-template #loginTemplate>
+        <form>
+            <b>Registro</b><br><br>
+            <div class="form-group">
+              <label for="nombreSU">Nombre</label>
+              <input class="form-control" id="nombreSU" placeholder="Ingrese su nombre">
+            </div>
+            <div class="form-group">
+              <label for="emailSU">Email</label>
+              <input type="email" class="form-control" id="emailSU" aria-describedby="emailHelp" placeholder="Ingrese email">
+              <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small><!-->
+              </div>
+              <div class="form-group">
+                <label for="passwordSU">Password</label>
+                <input type="password" class="form-control" id="passwordSU" placeholder="Ingrese una contraseña">
+              </div>
+              <button type="submit" class="btn btn-primary">Regritarse</button>
+            </form>
+    </ng-template>
+  </div>
