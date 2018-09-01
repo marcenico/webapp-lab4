@@ -12,7 +12,8 @@ import { AuthComponent } from './components/auth/auth.component';
   imports: [
     BrowserModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
