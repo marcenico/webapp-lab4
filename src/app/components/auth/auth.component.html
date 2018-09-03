@@ -1,42 +1,62 @@
-<div class="center-this" >
-
-  <ng-container *ngIf="!isLooged; else loginTemplate">
-    <form>
+<div class="center-this">
+  <ng-container *ngIf="!isLogged; else loginTemplate">
+    <form (ngSubmit)="signUp(forma)" #forma="ngForm">
       <b>Registro</b><br><br>
+
       <div class="form-group">
-        <label for="nombreSU">Nombre</label>
-        <input class="form-control" id="nombreSU" placeholder="Ingrese su nombre">
+        <label for="nameSU">Nombre</label>
+        <input class="form-control" id="nameSU" placeholder="Ingrese su nombre" minlength="3" name="nameSU" [(ngModel)]="usuario.name" required #nameSU="ngModel">
+        <div class="alert alert-danger" *ngIf="nameSU.errors?.required && nameSU.dirty">
+          Este campo es requerido
+        </div>
+        <div class="alert alert-warning" *ngIf="nameSU.errors?.minlength">
+          Al menos {{nameSU.errors.minlength.requiredLength}} caracteres
+        </div>
       </div>
+
       <div class="form-group">
         <label for="emailSU">Email</label>
-        <input type="email" class="form-control" id="emailSU" aria-describedby="emailHelp" placeholder="Ingrese email">
-        <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small><!-->
+        <input type="email" class="form-control" id="emailSU" placeholder="Ingrese email" name="emailSU" [(ngModel)]="usuario.email" required #emailSU="ngModel"
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+        <div class="alert alert-danger" *ngIf="emailSU.errors?.required && emailSU.dirty">
+          Este campo es requerido
         </div>
-        <div class="form-group">
-          <label for="passwordSU">Password</label>
-          <input type="password" class="form-control" id="passwordSU" placeholder="Ingrese una contraseña">
+      </div>
+
+      <div class="form-group">
+        <label for="passwordSU">Password</label>
+        <input type="password" class="form-control" id="passwordSU" placeholder="Ingrese una contraseña" minlength="8" name="passwordSU"
+        [(ngModel)]="usuario.password" #passwordSU="ngModel" required>
+        <div class="alert alert-danger" *ngIf="passwordSU.errors?.required && passwordSU.dirty">
+          Este campo es requerido
         </div>
-        <button type="submit" class="btn btn-primary">Regritarse</button>
-      </form>
-    </ng-container>
-    
-    <ng-template #loginTemplate>
-        <form>
-            <b>Registro</b><br><br>
-            <div class="form-group">
-              <label for="nombreSU">Nombre</label>
-              <input class="form-control" id="nombreSU" placeholder="Ingrese su nombre">
-            </div>
-            <div class="form-group">
-              <label for="emailSU">Email</label>
-              <input type="email" class="form-control" id="emailSU" aria-describedby="emailHelp" placeholder="Ingrese email">
-              <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small><!-->
-              </div>
-              <div class="form-group">
-                <label for="passwordSU">Password</label>
-                <input type="password" class="form-control" id="passwordSU" placeholder="Ingrese una contraseña">
-              </div>
-              <button type="submit" class="btn btn-primary">Regritarse</button>
-            </form>
-    </ng-template>
-  </div>
+        <div class="alert alert-warning" *ngIf="passwordSU.errors?.minlength">
+          Al menos {{passwordSU.errors.minlength.requiredLength}} caracteres
+        </div>
+      </div>
+
+      <button [disabled]="!forma.valid" type="submit" class="btn btn-success">Registrarse</button>
+
+    </form>
+  </ng-container>
+
+  <ng-template #loginTemplate>
+    <form>
+      <b>Inicio de sesión</b><br><br>
+
+      <div class="form-group">
+        <label for="nombreLI">Tu nombre de usuario</label>
+        <input class="form-control" id="nombreLI" placeholder="Ingrese su nombre" minlength="3" name="nombreLI" ngModel required>
+      </div>
+
+      <div class="form-group">
+        <label for="passwordLI">Tu contraseña</label>
+        <input type="password" class="form-control" id="passwordLI" placeholder="Ingrese una contraseña" minlength="8" name="passwordLI"
+          ngModel required>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Regritarse</button>
+
+    </form>
+  </ng-template>
+</div>

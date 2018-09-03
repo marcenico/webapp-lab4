@@ -5,3 +5,11 @@
     margin: auto;
     padding-top: 10%;
 }
+
+.ng-valid[required], .ng-valid.required  {
+    border-left: 6px solid #42A948; /* green */
+  }
+  
+  .ng-invalid:not(form)  {
+    border-left: 6px solid #a94442; /* red */
+  }

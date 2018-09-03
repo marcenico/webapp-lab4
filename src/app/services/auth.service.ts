@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Users, UsersApi, LoopBackFilter } from '../shared/sdk';
+import { Usuarios, UsuariosApi } from '../shared/sdk';
+import { LoopBackFilter } from './../shared/sdk/models/BaseModels';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,34 +8,31 @@ import { Observable } from 'rxjs';
 })
 
 export class AuthService {
+  constructor(private usersApi: UsuariosApi) { }
+  
 
-  constructor(private usersApi: UsersApi) { }
-
-  getAll(filtro: LoopBackFilter = {}): Observable<Users[]> {
+  getAll(filtro: LoopBackFilter = {}): Observable<Usuarios[]> {
     return this.usersApi.find(filtro);
   }
 
-  getOne(filtro: LoopBackFilter = {}): Observable<Users> {
+  getOne(filtro: LoopBackFilter = {}): Observable<Usuarios> {
     return this.usersApi.findOne(filtro);
   }
 
-  getById(id: number): Observable<Users> {
+  getById(id: number): Observable<Usuarios> {
     return this.usersApi.findById(id);
   }
 
-  create(data: Users): Observable<Users> {
+  create(data: Usuarios): Observable<Usuarios> {
     return this.usersApi.create(data);
   }
 
-  update(data: Users): Observable<Users> {
+  update(data: Usuarios): Observable<Usuarios> {
     return this.usersApi.patchAttributes(data.id, data);
   }
 
-  delete(data: Users): Observable<Users> {
+  delete(data: Usuarios): Observable<Usuarios> {
     return this.usersApi.deleteById(data.id);
   }
 
-  count() {
-    return this.usersApi.count();
-  }
 }
