@@ -17,12 +17,18 @@ import { SDKModels } from './shared/sdk/services/custom/SDKModels';
 import { InternalStorage } from './shared/sdk/storage/storage.swaps';
 import { AppRoutingModule } from './/app-routing.module';
 import { HomeComponent } from './components/home/home.component';
+import { ClientesComponent } from './components/clientes/clientes.component';
+import { ArticulosComponent } from './components/articulos/articulos.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 //#endregion
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
-    HomeComponent
+    HomeComponent,
+    ClientesComponent,
+    ArticulosComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

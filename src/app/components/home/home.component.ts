@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  public currentPage: Pages;
 
-  ngOnInit() {
+  constructor(
+    @Inject(DOCUMENT) private document: Document
+  ) {
   }
 
+  ngOnInit() {
+    this.document.body.id = "page-top";
+    this.currentPage = 5;
+  }
+
+
+}
+
+export enum Pages {
+  pageClientes = 1,
+  pageArticulos = 2,
+  pageRubros = 3,
+  pagePedidos = 4,
+  pageHome = 5
 }

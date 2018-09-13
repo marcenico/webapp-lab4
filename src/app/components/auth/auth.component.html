@@ -9,7 +9,7 @@
             <div class="form-label-group">
               <input class="form-control" id="nameSU" placeholder="Ingrese su nombre" minlength="3" name="nameSU"
                 [(ngModel)]="usuario.name" required #nameSU="ngModel">
-              <label for="nameSU">Nombre</label>
+              <label for="nameSU">Ingrese su nombre</label>
               <div *ngIf="nameSU.errors?.required && nameSU.dirty">
                 <div class="alert alert-danger">
                   * Este campo es requerido
@@ -28,7 +28,7 @@
             <div class="form-label-group">
               <input type="email" class="form-control" id="emailSU" placeholder="Ingrese email" name="emailSU"
                 [(ngModel)]="usuario.email" required #emailSU="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
-              <label for="emailSU">Email</label>
+              <label for="emailSU">Ingrese email</label>
 
               <div *ngIf="emailSU.errors?.required && emailSU.dirty">
                 <div class="alert alert-danger">
@@ -48,7 +48,7 @@
             <div class="form-label-group">
               <input type="password" class="form-control" id="passwordSU" placeholder="Ingrese una contraseña"
                 minlength="8" name="passwordSU" [(ngModel)]="usuario.password" #passwordSU="ngModel" required>
-              <label for="passwordSU">Password</label>
+              <label for="passwordSU">Ingrese una contraseña</label>
 
               <div *ngIf="passwordSU.errors?.required && passwordSU.dirty">
                 <div class="alert alert-danger">
@@ -86,7 +86,7 @@
             <div class="form-label-group">
               <input type="email" class="form-control" id="emailLI" placeholder="Ingrese email" name="emailLI"
                 [(ngModel)]="usuario.email" required #emailLI="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
-              <label for="emailLI">Email</label>
+              <label for="emailLI">Ingrese email</label>
 
               <div *ngIf="emailLI.errors?.required && emailLI.dirty">
                 <div class="alert alert-danger">
@@ -101,7 +101,7 @@
             <div class="form-label-group">
               <input type="password" class="form-control" id="passwordLI" placeholder="Ingrese una contraseña"
                 minlength="8" name="passwordLI" [(ngModel)]="usuario.password" #passwordLI="ngModel" required>
-              <label for="passwordLI">Password</label>
+              <label for="passwordLI">Ingrese una contraseña</label>
 
               <div *ngIf="passwordLI.errors?.required && passwordLI.dirty">
                 <div class="alert alert-danger">

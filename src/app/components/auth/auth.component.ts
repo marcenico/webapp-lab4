@@ -33,6 +33,10 @@ export class AuthComponent implements OnInit {
     this.document.body.classList.add('bg-dark')
   }
 
+  ngOnDestroy() {
+    this.document.body.classList.remove('bg-dark')
+  }
+
   public signUp(forma: NgForm) {
     console.log(this.usuario);
 
