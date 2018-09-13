@@ -15,17 +15,21 @@ import { AuthComponent } from './components/auth/auth.component';
 import { UsuariosApi, LoopBackAuth } from './shared/sdk';
 import { SDKModels } from './shared/sdk/services/custom/SDKModels';
 import { InternalStorage } from './shared/sdk/storage/storage.swaps';
+import { AppRoutingModule } from './/app-routing.module';
+import { HomeComponent } from './components/home/home.component';
 //#endregion
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent
+    AuthComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [UsuariosApi, HttpClientModule, SDKModels, InternalStorage, LoopBackAuth],
   bootstrap: [AppComponent]

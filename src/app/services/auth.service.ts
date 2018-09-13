@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 
 export class AuthService {
   constructor(private usersApi: UsuariosApi) { }
-  
+
 
   getAll(filtro: LoopBackFilter = {}): Observable<Usuarios[]> {
     return this.usersApi.find(filtro);
@@ -17,6 +17,11 @@ export class AuthService {
 
   getOne(filtro: LoopBackFilter = {}): Observable<Usuarios> {
     return this.usersApi.findOne(filtro);
+  }
+
+  login(user: Usuarios): Observable<Usuarios> {
+    let filter: any = {where: {and: [{email: user.email}, {password: user.password}]}};
+    return this.usersApi.findOne(filter);
   }
 
   getById(id: number): Observable<Usuarios> {

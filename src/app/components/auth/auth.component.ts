@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Component, OnInit, Inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Usuarios } from '../../shared/sdk';
 import { AuthService } from '../../services/auth.service';
+import { DOCUMENT } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-auth',
@@ -9,33 +11,55 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
-  
-  public isLogged: boolean = false
+
+  public goLogin: boolean = false;
+  public isValidSignUp: boolean = true;
+  public isValidLogIn: boolean = true;
+
   private usuario: any = {
     name: null,
     email: null,
     password: null
   }
 
-  constructor(private authService: AuthService
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    @Inject(DOCUMENT) private document: Document
   ) {
   }
 
   ngOnInit() {
+    this.document.body.classList.add('bg-dark')
   }
 
   public signUp(forma: NgForm) {
-    console.log(this.usuario.name);
-    let user: Usuarios = new Usuarios();
-    user.name = this.usuario.name;
-    user.email = this.usuario.email;
-    user.password = this.usuario.password;
-    console.log(user.name);
+    console.log(this.usuario);
 
-    this.authService.create(user)
+    this.authService.create(this.usuario)
+      .subscribe(res => {
+        this.isValidSignUp = true;
+        this.router.navigate(['/home'], { replaceUrl: true });
+      },
+        err => {
+          console.log("error en el registro" + err);
+          this.isValidSignUp = false;
+        }
+      );
+  }
+
+  public logIn(forma2: NgForm) {
+    console.log(this.usuario);
+    this.authService.login(this.usuario)
       .subscribe(user => {
-        console.log(user)
-      });
+        console.log("USUARIO => " + user);
+        this.isValidLogIn = true;
+        this.router.navigate(['/home'], { replaceUrl: true });
+      },
+        err => {
+          console.log("error en el inicio de sesion" + err);
+          this.isValidLogIn = false;
+        })
   }
 }
 

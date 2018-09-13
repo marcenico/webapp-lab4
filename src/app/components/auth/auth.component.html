@@ -1,62 +1,137 @@
-<div class="center-this">
-  <ng-container *ngIf="!isLogged; else loginTemplate">
-    <form (ngSubmit)="signUp(forma)" #forma="ngForm">
-      <b>Registro</b><br><br>
+<div class="container">
+  <ng-container *ngIf="!goLogin; else loginTemplate">
+    <div class="card card-login mx-auto mt-5">
+      <div class="card-header">Registrarse</div>
+      <div class="card-body">
 
-      <div class="form-group">
-        <label for="nameSU">Nombre</label>
-        <input class="form-control" id="nameSU" placeholder="Ingrese su nombre" minlength="3" name="nameSU" [(ngModel)]="usuario.name" required #nameSU="ngModel">
-        <div class="alert alert-danger" *ngIf="nameSU.errors?.required && nameSU.dirty">
-          Este campo es requerido
-        </div>
-        <div class="alert alert-warning" *ngIf="nameSU.errors?.minlength">
-          Al menos {{nameSU.errors.minlength.requiredLength}} caracteres
-        </div>
+        <form (ngSubmit)="signUp(forma)" #forma="ngForm">
+          <div class="form-group">
+            <div class="form-label-group">
+              <input class="form-control" id="nameSU" placeholder="Ingrese su nombre" minlength="3" name="nameSU"
+                [(ngModel)]="usuario.name" required #nameSU="ngModel">
+              <label for="nameSU">Nombre</label>
+              <div *ngIf="nameSU.errors?.required && nameSU.dirty">
+                <div class="alert alert-danger">
+                  * Este campo es requerido
+                </div>
+              </div>
+
+              <div *ngIf="nameSU.errors?.minlength">
+                <div class="alert alert-warning">
+                  * Al menos {{nameSU.errors.minlength.requiredLength}} caracteres
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-label-group">
+              <input type="email" class="form-control" id="emailSU" placeholder="Ingrese email" name="emailSU"
+                [(ngModel)]="usuario.email" required #emailSU="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+              <label for="emailSU">Email</label>
+
+              <div *ngIf="emailSU.errors?.required && emailSU.dirty">
+                <div class="alert alert-danger">
+                  * Este campo es requerido
+                </div>
+              </div>
+
+              <div *ngIf="!isValidSignUp">
+                <div class="alert alert-danger">
+                  * Error! ya existe un registro con este email
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-label-group">
+              <input type="password" class="form-control" id="passwordSU" placeholder="Ingrese una contraseña"
+                minlength="8" name="passwordSU" [(ngModel)]="usuario.password" #passwordSU="ngModel" required>
+              <label for="passwordSU">Password</label>
+
+              <div *ngIf="passwordSU.errors?.required && passwordSU.dirty">
+                <div class="alert alert-danger">
+                  * Este campo es requerido
+                </div>
+              </div>
+
+              <div *ngIf="passwordSU.errors?.minlength">
+                <div class="alert alert-warning">
+                  * Al menos {{passwordSU.errors.minlength.requiredLength}} caracteres
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button [disabled]="!forma.valid" type="submit" class="btn btn-success btn-block">Registrarse</button>
+
+          <div class="text-center">
+            <button class="btn btn-link" (click)="goLogin = true" role="link"><small class="form-text">
+                Ya tienes una cuenta?, Inicia Sesion</small></button>
+          </div>
+
+        </form>
       </div>
-
-      <div class="form-group">
-        <label for="emailSU">Email</label>
-        <input type="email" class="form-control" id="emailSU" placeholder="Ingrese email" name="emailSU" [(ngModel)]="usuario.email" required #emailSU="ngModel"
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
-        <div class="alert alert-danger" *ngIf="emailSU.errors?.required && emailSU.dirty">
-          Este campo es requerido
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="passwordSU">Password</label>
-        <input type="password" class="form-control" id="passwordSU" placeholder="Ingrese una contraseña" minlength="8" name="passwordSU"
-        [(ngModel)]="usuario.password" #passwordSU="ngModel" required>
-        <div class="alert alert-danger" *ngIf="passwordSU.errors?.required && passwordSU.dirty">
-          Este campo es requerido
-        </div>
-        <div class="alert alert-warning" *ngIf="passwordSU.errors?.minlength">
-          Al menos {{passwordSU.errors.minlength.requiredLength}} caracteres
-        </div>
-      </div>
-
-      <button [disabled]="!forma.valid" type="submit" class="btn btn-success">Registrarse</button>
-
-    </form>
+    </div>
   </ng-container>
 
   <ng-template #loginTemplate>
-    <form>
-      <b>Inicio de sesión</b><br><br>
+    <div class="card card-login mx-auto mt-5">
+      <div class="card-header">Inicia sesión</div>
+      <div class="card-body">
+        <form (ngSubmit)="logIn(forma2)" #forma2="ngForm">
 
-      <div class="form-group">
-        <label for="nombreLI">Tu nombre de usuario</label>
-        <input class="form-control" id="nombreLI" placeholder="Ingrese su nombre" minlength="3" name="nombreLI" ngModel required>
+          <div class="form-group">
+            <div class="form-label-group">
+              <input type="email" class="form-control" id="emailLI" placeholder="Ingrese email" name="emailLI"
+                [(ngModel)]="usuario.email" required #emailLI="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+              <label for="emailLI">Email</label>
+
+              <div *ngIf="emailLI.errors?.required && emailLI.dirty">
+                <div class="alert alert-danger">
+                  * Este campo es requerido
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="form-label-group">
+              <input type="password" class="form-control" id="passwordLI" placeholder="Ingrese una contraseña"
+                minlength="8" name="passwordLI" [(ngModel)]="usuario.password" #passwordLI="ngModel" required>
+              <label for="passwordLI">Password</label>
+
+              <div *ngIf="passwordLI.errors?.required && passwordLI.dirty">
+                <div class="alert alert-danger">
+                  * Este campo es requerido
+                </div>
+              </div>
+
+              <div *ngIf="passwordLI.errors?.minlength">
+                <div class="alert alert-warning">
+                  * Al menos {{passwordLI.errors.minlength.requiredLength}} caracteres
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button [disabled]="!forma2.valid" type="submit" class="btn btn-primary btn-block">Iniciar Sesion</button>
+
+          <div *ngIf="!isValidLogIn"><br>
+            <div class="alert alert-danger">
+              * Error! correo o contraseña invalidos!
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button class="btn btn-link" (click)="goLogin = false" role="link"><small class="form-text">No tienes una
+                cuenta?, Registrate!</small></button>
+          </div>
+
+        </form>
       </div>
-
-      <div class="form-group">
-        <label for="passwordLI">Tu contraseña</label>
-        <input type="password" class="form-control" id="passwordLI" placeholder="Ingrese una contraseña" minlength="8" name="passwordLI"
-          ngModel required>
-      </div>
-
-      <button type="submit" class="btn btn-primary">Regritarse</button>
-
-    </form>
+    </div>
   </ng-template>
 </div>
