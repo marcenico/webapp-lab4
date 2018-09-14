@@ -1,69 +1,33 @@
 <div id="content-wrapper">
   <div class="container-fluid">
-    <div id="content-wrapper">
-      <div class="container-fluid">
-
-        <!-- DataTables Example -->
-        <div class="card mb-3">
-          <div class="card-header">
-            <i class="fas fa-table"></i>
-            Data Table Example</div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
-                  </tr>
-                </thead>
-                <tfoot>
-                  <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
-                  </tr>
-                </tfoot>
-                <tbody>
-                  <tr>
-                    <td>Cedric Kelly</td>
-                    <td>Senior Javascript Developer</td>
-                    <td>Edinburgh</td>
-                    <td>22</td>
-                    <td>2012/03/29</td>
-                    <td>$433,060</td>
-                  </tr>
-                  <tr>
-                    <td>Airi Satou</td>
-                    <td>Accountant</td>
-                    <td>Tokyo</td>
-                    <td>33</td>
-                    <td>2008/11/28</td>
-                    <td>$162,700</td>
-                  </tr>
-                  <tr>
-                    <td>Brielle Williamson</td>
-                    <td>Integration Specialist</td>
-                    <td>New York</td>
-                    <td>61</td>
-                    <td>2012/12/02</td>
-                    <td>$372,000</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+    <div class="card mb-3">
+      <div class="card-header">
+        <i class="fas fa-table"></i>
+        Tabla de clientes</div>
+      <div class="card-body">
+        <div class="table-responsive-sm">
+          <table class="table table-hover" datatable="" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Razon Social</th>
+                <th scope="col">Cuit</th>
+                <th scope="col">Saldo</th>
+                <th scope="col">Age</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="clientes?.length != 0">
+              <tr *ngFor="let client of clientes; let i = index">
+                <th scope="col">{{i+1}}</th>
+                <td>{{client.razonSocial}}</td>
+                <td>{{client.cuit}}</td>
+                <td>{{client.saldo}}</td>
+                <td>{{client | json}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-      <!-- /.container-fluid -->
     </div>
-    <!-- /.container-fluid -->
   </div>
 </div>
