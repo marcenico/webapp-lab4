@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Cliente, ClienteApi, DomicilioApi } from '../shared/sdk';
+import { Cliente, ClienteApi, Domicilio } from '../shared/sdk';
 import { LoopBackFilter } from './../shared/sdk/models/BaseModels';
 import { Observable } from 'rxjs';
 
@@ -8,10 +8,8 @@ import { Observable } from 'rxjs';
 })
 
 export class ClienteService {
-  constructor(private clienteApi: ClienteApi,
-    private domicilioApi: DomicilioApi) { }
-
-
+  constructor(private clienteApi: ClienteApi) { }
+  
   getAll(filtro: LoopBackFilter = {}): Observable<Cliente[]> {
     return this.clienteApi.find(filtro);
   }
@@ -35,5 +33,4 @@ export class ClienteService {
   delete(data: Cliente): Observable<Cliente> {
     return this.clienteApi.deleteById(data.id);
   }
-
 }
