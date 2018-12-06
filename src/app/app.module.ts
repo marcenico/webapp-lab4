@@ -15,6 +15,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { ArticulosComponent } from './components/articulos/articulos.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { AgregarClienteComponent } from './components/clientes/agregar-cliente/agregar-cliente.component';
 //#endregion
 
 //#region AGREGADAS PARA QUE FUNCIONE EL SDK*/
@@ -31,6 +32,7 @@ import { InternalStorage } from './shared/sdk/storage/storage.swaps';
     ClientesComponent,
     ArticulosComponent,
     NavbarComponent,
+    AgregarClienteComponent
   ],
   imports: [
     BrowserModule,
