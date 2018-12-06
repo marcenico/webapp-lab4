@@ -31,7 +31,11 @@ export class ClientesComponent implements OnInit, OnDestroy {
         this.domicilioService.getAll({ include: 'cliente_domicilio' })
             .subscribe((data: Domicilio[]) => {
                 console.log(data);
-                this.clientesDomicilio = data;
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].cliente_domicilio != null) {
+                        this.clientesDomicilio[i] = data[i];
+                    }
+                }
 
                 this.chRef.detectChanges();
                 const table: any = $('table');
@@ -45,15 +49,16 @@ export class ClientesComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.dtTrigger.unsubscribe();
     }
+
 }
 
 class Lang {
     static lang: any = {
-            "lengthMenu": "Mostrando _MENU_ registros por pagina",
-            "zeroRecords": "No hay registros",
-            "info": "Mostrando _PAGE_ de _PAGES_ paginas",
-            "infoEmpty": "No hay registros",
-            "search": "Buscar:",
-            "infoFiltered": "(Filtrado de _MAX_ total de registros)"
+        "lengthMenu": "Mostrando _MENU_ registros por pagina",
+        "zeroRecords": "No hay registros",
+        "info": "Mostrando _PAGE_ de _PAGES_ paginas",
+        "infoEmpty": "No hay registros",
+        "search": "Buscar:",
+        "infoFiltered": "(Filtrado de _MAX_ total de registros)"
     }
 }
