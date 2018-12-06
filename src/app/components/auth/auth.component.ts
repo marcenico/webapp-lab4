@@ -3,6 +3,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { DOCUMENT } from '@angular/platform-browser';
+import { Usuarios } from 'src/app/shared/sdk';
 
 
 @Component({
@@ -16,11 +17,7 @@ export class AuthComponent implements OnInit {
   public isValidSignUp: boolean = true;
   public isValidLogIn: boolean = true;
 
-  private usuario: any = {
-    name: null,
-    email: null,
-    password: null
-  }
+  private usuario: Usuarios = new Usuarios();
 
   constructor(
     private authService: AuthService,
@@ -39,7 +36,6 @@ export class AuthComponent implements OnInit {
 
   public signUp(forma: NgForm) {
     console.log(this.usuario);
-
     this.authService.create(this.usuario)
       .subscribe(res => {
         this.isValidSignUp = true;
