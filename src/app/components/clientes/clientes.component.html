@@ -3,7 +3,9 @@
     <div class="card mb-3">
       <div class="card-header">
         <i class="fas fa-table"></i>
-        Registro de clientes</div>
+        Registro de clientes
+        <a class="btn btn-sm btn-danger" href="#" data-toggle="modal" data-target="#agregarCliente" style="float: right;">AgregarCliente</a>
+      </div>
       <div class="card-body">
         <div class="table-responsive-sm">
           <table id="example" class="table table-hover table-striped table-bordered" style="width:100%" datatable=""
@@ -33,10 +35,10 @@
                 <td>{{clienteDomicilio.latitud}}</td>
                 <td>{{clienteDomicilio.longitud}}</td>
                 <td><button type="button" class="btn btn-sm btn-info">
-                  <span class="fas fa-edit"></span>
+                    <span class="fas fa-edit"></span>
                   </button></td>
                 <td><button type="button" class="btn btn-sm btn-danger">
-                  <span class="fas fa-trash-alt"></span>
+                    <span class="fas fa-trash-alt"></span>
                   </button></td>
               </tr>
             </tbody>
@@ -46,3 +48,4 @@
     </div>
   </div>
 </div>
+<app-agregar-cliente></app-agregar-cliente>

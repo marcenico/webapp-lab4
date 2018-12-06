@@ -8,8 +8,7 @@ import 'datatables.net-bs4';
 
 @Component({
     selector: 'app-clientes',
-    templateUrl: './clientes.component.html',
-    styleUrls: ['./clientes.component.css']
+    templateUrl: './clientes.component.html'
 })
 export class ClientesComponent implements OnInit, OnDestroy {
 
@@ -22,7 +21,14 @@ export class ClientesComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(): void {
+        this.ArmarTabla();
+    }
 
+    ngOnDestroy(): void {
+        this.dtTrigger.unsubscribe();
+    }
+
+    private ArmarTabla() {
         this.dtOptions = {
             pagingType: 'full_numbers',
             processing: true,
@@ -46,9 +52,6 @@ export class ClientesComponent implements OnInit, OnDestroy {
             });
     }
 
-    ngOnDestroy(): void {
-        this.dtTrigger.unsubscribe();
-    }
 
 }
 
