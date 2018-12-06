@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './/app-routing.module';
 import { DataTablesModule } from 'angular-datatables';
@@ -40,7 +40,8 @@ import { InternalStorage } from './shared/sdk/storage/storage.swaps';
     HttpModule,
     HttpClientModule,
     AppRoutingModule,
-    DataTablesModule
+    DataTablesModule,
+    ReactiveFormsModule
   ],
   providers: [DomicilioApi, UsuariosApi, ClienteApi, HttpClientModule, SDKModels, InternalStorage, LoopBackAuth],
   bootstrap: [AppComponent]

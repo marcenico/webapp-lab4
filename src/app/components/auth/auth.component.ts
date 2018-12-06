@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { DOCUMENT } from '@angular/platform-browser';
 import { Usuarios } from 'src/app/shared/sdk';
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 
 @Component({
@@ -16,6 +17,7 @@ export class AuthComponent implements OnInit {
   public goLogin: boolean = false;
   public isValidSignUp: boolean = true;
   public isValidLogIn: boolean = true;
+  public formaRegistro: FormGroup;
 
   private usuario: Usuarios = new Usuarios();
 
@@ -24,6 +26,7 @@ export class AuthComponent implements OnInit {
     private router: Router,
     @Inject(DOCUMENT) private document: Document
   ) {
+    this.validarRegistro();
   }
 
   ngOnInit() {
@@ -34,7 +37,16 @@ export class AuthComponent implements OnInit {
     this.document.body.classList.remove('bg-dark')
   }
 
-  public signUp(forma: NgForm) {
+  validarRegistro() {
+    this.formaRegistro = new FormGroup({
+      'nameSU': new FormControl('', [Validators.required, Validators.minLength(3)]),
+      'passwordSU': new FormControl('', [Validators.required, Validators.minLength(8)]),
+      'emailSU': new FormControl('', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")])
+    })
+  }
+
+
+  public signUp() {
     console.log(this.usuario);
     this.authService.create(this.usuario)
       .subscribe(res => {
