@@ -1,127 +1,133 @@
 <div class="container">
-  <ng-container *ngIf="!goLogin; else loginTemplate">
-    <div class="card card-login mx-auto mt-5">
-      <div class="card-header">Registrarse</div>
-      <div class="card-body">
+  <div class="row">
+    <div class="col">
+      <ng-container *ngIf="!goLogin; else loginTemplate">
+        <div class="card card-login mx-auto mt-5">
+          <div class="card-header">Registrarse</div>
+          <div class="card-body">
 
-        <form (ngSubmit)="signUp()" [formGroup]="formaRegistro">
-        
-          <div class="form-group">
-            <label for="nameSU">Ingrese su nombre</label>
-            <input class="form-control" type="text" placeholder="Ingrese su nombre" formControlName="nameSU" [ngClass]="{'ng-valid': formaRegistro.get('nameSU').valid}">
+            <form (ngSubmit)="signUp()" [formGroup]="formaRegistro">
 
-            <div class="alert alert-warning" *ngIf="formaRegistro.get('nameSU').errors?.required && formaRegistro.get('nameSU').dirty">
-              * Este campo es requerido
-            </div>
+              <div class="form-group">
+                <label for="nameSU">Ingrese nombre</label>
+                <input class="form-control" type="text" placeholder="Ingrese su nombre" formControlName="nameSU"
+                  [ngClass]="{'ng-valid': formaRegistro.get('nameSU').valid}">
 
-            <div class="alert alert-warning" *ngIf="formaRegistro.get('nameSU').errors?.minlength">
-              * Al menos {{formaRegistro.get('nameSU').errors?.minlength.requiredLength}} caracteres
-            </div>
-          </div>
-
-
-          <div class="form-group" >
-            <label for="emailSU">Ingrese email</label>
-            <input type="email" class="form-control" placeholder="Ingrese email"
-             formControlName="emailSU"
-             [ngClass]="{'ng-valid': formaRegistro.get('emailSU').valid}">
-
-            <div class="alert alert-warning" *ngIf="formaRegistro.get('emailSU').errors?.required && formaRegistro.get('emailSU').dirty">
-                * Este campo es requerido
-            </div>
-
-            <div class="alert alert-warning" *ngIf="formaRegistro.get('emailSU').errors?.pattern">
-                * No cumple con el formato de correo
-            </div>
-
-            <div *ngIf="!isValidSignUp">
-              <div class="alert alert-danger">
-                * Error! ya existe un registro con este email
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-              <label for="passwordSU">Ingrese su contraseña</label>
-              <input class="form-control" type="password" placeholder="Ingrese su contraseña" formControlName="passwordSU" [ngClass]="{'ng-valid': formaRegistro.get('passwordSU').valid}">
-  
-              <div class="alert alert-warning" *ngIf="formaRegistro.get('passwordSU').errors?.required && formaRegistro.get('passwordSU').dirty">
-                * Este campo es requerido
-              </div>
-  
-              <div class="alert alert-warning" *ngIf="formaRegistro.get('passwordSU').errors?.minlength">
-                * Al menos {{formaRegistro.get('passwordSU').errors?.minlength.requiredLength}} caracteres
-              </div>
-            </div>
-
-          <button [disabled]="!formaRegistro.valid" type="submit" class="btn btn-success btn-block">Registrarse</button>
-
-          <div class="text-center">
-            <button class="btn btn-link" (click)="goLogin = true" role="link"><small class="form-text">
-                Ya tienes una cuenta?, Inicia Sesion</small></button>
-          </div>
-
-        </form>
-      </div>
-    </div>
-  </ng-container>
-
-  <ng-template #loginTemplate>
-    <div class="card card-login mx-auto mt-5">
-      <div class="card-header">Inicia sesión</div>
-      <div class="card-body">
-        <form (ngSubmit)="logIn(forma2)" #forma2="ngForm">
-
-          <div class="form-group">
-            <div class="form-label-group">
-              <input type="email" class="form-control" id="emailLI" placeholder="Ingrese email" name="emailLI"
-                [(ngModel)]="usuario.email" required #emailLI="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
-              <label for="emailLI">Ingrese email</label>
-
-              <div *ngIf="emailLI.errors?.required && emailLI.dirty">
-                <div class="alert alert-danger">
+                <div class="alert alert-warning" *ngIf="formaRegistro.get('nameSU').errors?.required && formaRegistro.get('nameSU').dirty">
                   * Este campo es requerido
                 </div>
+
+                <div class="alert alert-warning" *ngIf="formaRegistro.get('nameSU').errors?.minlength">
+                  * Al menos {{formaRegistro.get('nameSU').errors?.minlength.requiredLength}} caracteres
+                </div>
               </div>
 
-            </div>
-          </div>
 
-          <div class="form-group">
-            <div class="form-label-group">
-              <input type="password" class="form-control" id="passwordLI" placeholder="Ingrese una contraseña"
-                minlength="8" name="passwordLI" [(ngModel)]="usuario.password" #passwordLI="ngModel" required>
-              <label for="passwordLI">Ingrese una contraseña</label>
+              <div class="form-group">
+                <label for="emailSU">Ingrese email</label>
+                <input type="email" class="form-control" placeholder="Ingrese email" formControlName="emailSU"
+                  [ngClass]="{'ng-valid': formaRegistro.get('emailSU').valid}">
 
-              <div *ngIf="passwordLI.errors?.required && passwordLI.dirty">
-                <div class="alert alert-danger">
+                <div class="alert alert-warning" *ngIf="formaRegistro.get('emailSU').errors?.required && formaRegistro.get('emailSU').dirty">
                   * Este campo es requerido
                 </div>
-              </div>
 
-              <div *ngIf="passwordLI.errors?.minlength">
-                <div class="alert alert-warning">
-                  * Al menos {{passwordLI.errors.minlength.requiredLength}} caracteres
+                <div class="alert alert-warning" *ngIf="formaRegistro.get('emailSU').errors?.pattern">
+                  * No cumple con el formato de correo
+                </div>
+
+                <div *ngIf="!isValidSignUp">
+                  <div class="alert alert-danger">
+                    * Error! ya existe un registro con este email
+                  </div>
                 </div>
               </div>
-            </div>
+
+              <div class="form-group">
+                <label for="passwordSU">Ingrese contraseña</label>
+                <input class="form-control" type="password" placeholder="Ingrese su contraseña" formControlName="passwordSU"
+                  [ngClass]="{'ng-valid': formaRegistro.get('passwordSU').valid}">
+
+                <div class="alert alert-warning" *ngIf="formaRegistro.get('passwordSU').errors?.required && formaRegistro.get('passwordSU').dirty">
+                  * Este campo es requerido
+                </div>
+
+                <div class="alert alert-warning" *ngIf="formaRegistro.get('passwordSU').errors?.minlength">
+                  * Al menos {{formaRegistro.get('passwordSU').errors?.minlength.requiredLength}} caracteres
+                </div>
+              </div>
+
+              <button [disabled]="!formaRegistro.valid" type="submit" class="btn btn-success btn-block">Registrarse</button>
+
+              <div class="text-center">
+                <button class="btn btn-link" (click)="goLogin = true" role="link"><small class="form-text">
+                    Ya tienes una cuenta?, Inicia Sesion</small></button>
+              </div>
+
+            </form>
           </div>
+        </div>
+      </ng-container>
 
-          <button [disabled]="!forma2.valid" type="submit" class="btn btn-primary btn-block">Iniciar Sesion</button>
 
-          <div *ngIf="!isValidLogIn"><br>
-            <div class="alert alert-danger">
-              * Error! correo o contraseña invalidos!
-            </div>
+      <ng-template #loginTemplate>
+        <div class="card card-login mx-auto mt-5">
+          <div class="card-header">Inicia sesión</div>
+          <div class="card-body">
+            <form (ngSubmit)="logIn()" [formGroup]="formaLogin">
+
+              <div class="form-group">
+                <label for="emailLI">Ingrese su email</label>
+                <input type="email" class="form-control" placeholder="Ingrese email" formControlName="emailLI"
+                  [ngClass]="{'ng-valid': formaLogin.get('emailLI').valid}">
+
+                <div class="alert alert-warning" *ngIf="formaLogin.get('emailLI').errors?.required && formaLogin.get('emailLI').dirty">
+                  * Este campo es requerido
+                </div>
+
+                <div class="alert alert-warning" *ngIf="formaLogin.get('emailLI').errors?.pattern">
+                  * No cumple con el formato de correo
+                </div>
+
+                <div *ngIf="!isValidLogIn">
+                  <div class="alert alert-danger">
+                    * Error! ya existe un registro con este email
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="passwordLI">Ingrese su contraseña</label>
+                <input class="form-control" type="password" placeholder="Ingrese su contraseña" formControlName="passwordLI"
+                  [ngClass]="{'ng-valid': formaLogin.get('passwordLI').valid}">
+
+                <div class="alert alert-warning" *ngIf="formaLogin.get('passwordLI').errors?.required && formaLogin.get('passwordLI').dirty">
+                  * Este campo es requerido
+                </div>
+
+                <div class="alert alert-warning" *ngIf="formaLogin.get('passwordLI').errors?.minlength">
+                  * Al menos {{formaLogin.get('passwordLI').errors?.minlength.requiredLength}} caracteres
+                </div>
+              </div>
+
+              <button [disabled]="!formaLogin.valid" type="submit" class="btn btn-primary btn-block">Iniciar Sesion</button>
+
+              <div *ngIf="!isValidLogIn"><br>
+                <div class="alert alert-danger">
+                  * Error! correo o contraseña invalidos!
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button class="btn btn-link" (click)="goLogin = false" role="link"><small class="form-text">No tienes
+                    una
+                    cuenta?, Registrate!</small></button>
+              </div>
+
+            </form>
           </div>
-
-          <div class="text-center">
-            <button class="btn btn-link" (click)="goLogin = false" role="link"><small class="form-text">No tienes una
-                cuenta?, Registrate!</small></button>
-          </div>
-
-        </form>
-      </div>
+        </div>
+      </ng-template>
     </div>
-  </ng-template>
+  </div>
 </div>

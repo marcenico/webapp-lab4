@@ -18,6 +18,7 @@ export class AuthComponent implements OnInit {
   public isValidSignUp: boolean = true;
   public isValidLogIn: boolean = true;
   public formaRegistro: FormGroup;
+  public formaLogin: FormGroup;
 
   private usuario: Usuarios = new Usuarios();
 
@@ -27,6 +28,7 @@ export class AuthComponent implements OnInit {
     @Inject(DOCUMENT) private document: Document
   ) {
     this.validarRegistro();
+    this.validarInicioSesion();
   }
 
   ngOnInit() {
@@ -45,6 +47,12 @@ export class AuthComponent implements OnInit {
     })
   }
 
+  validarInicioSesion() {
+    this.formaLogin = new FormGroup({
+      'passwordLI': new FormControl('', [Validators.required, Validators.minLength(8)]),
+      'emailLI': new FormControl('', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")])
+    })
+  }
 
   public signUp() {
     console.log(this.usuario);
@@ -60,7 +68,7 @@ export class AuthComponent implements OnInit {
       );
   }
 
-  public logIn(forma2: NgForm) {
+  public logIn() {
     console.log(this.usuario);
     this.authService.login(this.usuario)
       .subscribe(user => {
