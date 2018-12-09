@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col">
       <ng-container *ngIf="!goLogin; else loginTemplate">
-        <div class="card card-login mx-auto mt-5">
+        <div class="card card-login mx-auto mt-5 shadow">
           <div class="card-header">Registrarse</div>
           <div class="card-body">
 
@@ -71,7 +71,7 @@
 
 
       <ng-template #loginTemplate>
-        <div class="card card-login mx-auto mt-5">
+        <div class="card card-login mx-auto mt-5 shadow">
           <div class="card-header">Inicia sesión</div>
           <div class="card-body">
             <form (ngSubmit)="logIn()" [formGroup]="formaLogin">
