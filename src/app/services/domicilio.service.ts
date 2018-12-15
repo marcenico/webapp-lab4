@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DomicilioApi, Domicilio } from '../shared/sdk';
 import { Observable } from 'rxjs';
-import { LoopBackFilter } from '../../../../ionicapp/src/app/shared/sdk';
+import { LoopBackFilter } from '../../../../webapp/src/app/shared/sdk';
 
 @Injectable({
   providedIn: 'root'
