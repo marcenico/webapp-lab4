@@ -9,17 +9,23 @@ export class AgregarClienteComponent implements OnInit {
 
   forma: FormGroup;
 
-  constructor() { }
+  constructor() { 
+    this.validarFormulario();
+  }
 
   ngOnInit() {
-    this.validarFormulario();
   }
 
   private validarFormulario() {
     this.forma = new FormGroup({
-      'nameSU': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'passwordSU': new FormControl('', [Validators.required, Validators.minLength(8)]),
-      'emailSU': new FormControl('', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")])
+      'razonSocial': new FormControl('', [Validators.required]),
+      'cuit': new FormControl('', [Validators.required]),
+      'saldo': new FormControl('', []),
+      'calle': new FormControl('', [Validators.required]),
+      'numero': new FormControl('', [Validators.required]),
+      'localidad': new FormControl('', [Validators.required]),   
+      'latitud': new FormControl('', [Validators.required]),   
+      'longitud': new FormControl('', [Validators.required])   
     })
   }
 

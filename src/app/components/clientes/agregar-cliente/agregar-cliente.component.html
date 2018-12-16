@@ -10,38 +10,57 @@
         </button>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="agregarCliente(forma)" #forma2="ngForm">
+        <form (ngSubmit)="agregarCliente(forma)" [formGroup]="forma">
 
           <div class="form-row">
             <!-- Razon Social -->
             <div class="form-group col-md-4">
               <label for="razonSocial">Razon Social</label>
-              <input type="text" class="form-control" id="razonSocial" placeholder="Razon social...">
+              <input type="text" class="form-control" id="razonSocial" placeholder="Razon social..." formControlName="razonSocial">
+
+              <div class="alert alert-warning" *ngIf="forma.get('razonSocial').errors?.required && forma.get('razonSocial').dirty">
+                * Este campo es requerido
+              </div>
             </div>
 
             <!-- Cuit -->
             <div class="form-group col-md-4">
               <label for="cuit">Cuit</label>
-              <input type="text" class="form-control" id="cuit" placeholder="Cuit...">
+              <input type="text" class="form-control" id="cuit" placeholder="Cuit..." formControlName="cuit">
+
+              <div class="alert alert-warning" *ngIf="forma.get('cuit').errors?.required && forma.get('cuit').dirty">
+                * Este campo es requerido
+              </div>
             </div>
 
             <!-- Saldo -->
             <div class="form-group col-md-4">
               <label for="saldo">Saldo</label>
-              <input type="number" class="form-control" id="saldo" placeholder="Saldo...">
+              <input type="number" class="form-control" id="saldo" placeholder="Saldo..." formControlName="saldo">
+
+
             </div>
           </div>
+
           <div class="form-row">
             <!-- Calle -->
             <div class="form-group col-md-9">
               <label for="calle">Calle</label>
-              <input type="text" class="form-control" id="calle" placeholder="Calle...">
+              <input type="text" class="form-control" id="calle" placeholder="Calle..." formControlName="calle">
+
+              <div class="alert alert-warning" *ngIf="forma.get('calle').errors?.required && forma.get('calle').dirty">
+                * Este campo es requerido
+              </div>
             </div>
 
             <!-- Numero -->
             <div class="form-group col-md-3">
               <label for="numero">Numero</label>
-              <input type="number" class="form-control" id="numero" placeholder="Numero...">
+              <input type="number" class="form-control" id="numero" placeholder="Numero..." formControlName="numero">
+
+              <div class="alert alert-warning" *ngIf="forma.get('numero').errors?.required && forma.get('numero').dirty">
+                * Este campo es requerido
+              </div>
             </div>
 
           </div>
@@ -50,25 +69,38 @@
             <!-- Localidad -->
             <div class="form-group col-md-6">
               <label for="localidad">Localidad</label>
-              <input type="text" class="form-control" id="localidad" placeholder="Localidad...">
+              <input type="text" class="form-control" id="localidad" placeholder="Localidad..." formControlName="localidad">
+
+              <div class="alert alert-warning" *ngIf="forma.get('localidad').errors?.required && forma.get('localidad').dirty">
+                * Este campo es requerido
+              </div>
             </div>
 
             <!-- Latitud -->
             <div class="form-group col-md-3">
               <label for="latitud">Latitud</label>
-              <input type="text" class="form-control" id="latitud" placeholder="Latitud...">
+              <input type="number" class="form-control" id="latitud" placeholder="Latitud..." formControlName="latitud" maxlength="10">
+
+              <div class="alert alert-warning" *ngIf="forma.get('latitud').errors?.required && forma.get('latitud').dirty">
+                * Este campo es requerido
+              </div>
             </div>
 
-            <!-- Latitud -->
+            <!-- Longitud -->
             <div class="form-group col-md-3">
               <label for="longitud">Longitud</label>
-              <input type="text" class="form-control" id="longitud" placeholder="Longitud...">
+              <input type="number" class="form-control" id="longitud" placeholder="Longitud..." formControlName="longitud" maxlength="10">
+              
+            </div>
+
+            <div class="alert alert-warning" *ngIf="forma.get('longitud').errors?.required && forma.get('longitud').dirty">
+              * Este campo es requerido
             </div>
           </div>
 
           <div class="modal-footer">
             <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            <button [disabled]="true" class="btn btn-primary" type="submit" data-dismiss="modal">Guardar</button>
+            <button [disabled]="!forma.valid" class="btn btn-primary" type="submit" data-dismiss="modal">Guardar</button>
           </div>
         </form>
       </div>
