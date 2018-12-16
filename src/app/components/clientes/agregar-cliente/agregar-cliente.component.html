@@ -10,13 +10,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="agregarCliente(forma)" [formGroup]="forma">
+        <form (ngSubmit)="agregarCliente()" [formGroup]="forma">
 
           <div class="form-row">
             <!-- Razon Social -->
             <div class="form-group col-md-4">
               <label for="razonSocial">Razon Social</label>
-              <input type="text" class="form-control" id="razonSocial" placeholder="Razon social..." formControlName="razonSocial">
+              <input type="text" class="form-control" id="razonSocial" placeholder="Razon social..." formControlName="razonSocial" [(ngModel)]="domicilio.cliente_domicilio.razonSocial">
 
               <div class="alert alert-warning" *ngIf="forma.get('razonSocial').errors?.required && forma.get('razonSocial').dirty">
                 * Este campo es requerido
@@ -26,7 +26,7 @@
             <!-- Cuit -->
             <div class="form-group col-md-4">
               <label for="cuit">Cuit</label>
-              <input type="text" class="form-control" id="cuit" placeholder="Cuit..." formControlName="cuit">
+              <input type="text" class="form-control" id="cuit" placeholder="Cuit..." formControlName="cuit" [(ngModel)]="domicilio.cliente_domicilio.cuit">
 
               <div class="alert alert-warning" *ngIf="forma.get('cuit').errors?.required && forma.get('cuit').dirty">
                 * Este campo es requerido
@@ -36,9 +36,7 @@
             <!-- Saldo -->
             <div class="form-group col-md-4">
               <label for="saldo">Saldo</label>
-              <input type="number" class="form-control" id="saldo" placeholder="Saldo..." formControlName="saldo">
-
-
+              <input type="number" class="form-control" id="saldo" placeholder="Saldo..." formControlName="saldo" [(ngModel)]="domicilio.cliente_domicilio.saldo">
             </div>
           </div>
 
@@ -46,7 +44,7 @@
             <!-- Calle -->
             <div class="form-group col-md-9">
               <label for="calle">Calle</label>
-              <input type="text" class="form-control" id="calle" placeholder="Calle..." formControlName="calle">
+              <input type="text" class="form-control" id="calle" placeholder="Calle..." formControlName="calle" [(ngModel)]="domicilio.calle">
 
               <div class="alert alert-warning" *ngIf="forma.get('calle').errors?.required && forma.get('calle').dirty">
                 * Este campo es requerido
@@ -56,7 +54,7 @@
             <!-- Numero -->
             <div class="form-group col-md-3">
               <label for="numero">Numero</label>
-              <input type="number" class="form-control" id="numero" placeholder="Numero..." formControlName="numero">
+              <input type="number" class="form-control" id="numero" placeholder="Numero..." formControlName="numero" [(ngModel)]="domicilio.numero">
 
               <div class="alert alert-warning" *ngIf="forma.get('numero').errors?.required && forma.get('numero').dirty">
                 * Este campo es requerido
@@ -69,7 +67,7 @@
             <!-- Localidad -->
             <div class="form-group col-md-6">
               <label for="localidad">Localidad</label>
-              <input type="text" class="form-control" id="localidad" placeholder="Localidad..." formControlName="localidad">
+              <input type="text" class="form-control" id="localidad" placeholder="Localidad..." formControlName="localidad" [(ngModel)]="domicilio.localidad">
 
               <div class="alert alert-warning" *ngIf="forma.get('localidad').errors?.required && forma.get('localidad').dirty">
                 * Este campo es requerido
@@ -79,7 +77,7 @@
             <!-- Latitud -->
             <div class="form-group col-md-3">
               <label for="latitud">Latitud</label>
-              <input type="number" class="form-control" id="latitud" placeholder="Latitud..." formControlName="latitud" maxlength="10">
+              <input type="number" class="form-control" id="latitud" placeholder="Latitud..." formControlName="latitud" maxlength="10" [(ngModel)]="domicilio.latitud">
 
               <div class="alert alert-warning" *ngIf="forma.get('latitud').errors?.required && forma.get('latitud').dirty">
                 * Este campo es requerido
@@ -89,7 +87,7 @@
             <!-- Longitud -->
             <div class="form-group col-md-3">
               <label for="longitud">Longitud</label>
-              <input type="number" class="form-control" id="longitud" placeholder="Longitud..." formControlName="longitud" maxlength="10">
+              <input type="number" class="form-control" id="longitud" placeholder="Longitud..." formControlName="longitud" maxlength="10" [(ngModel)]="domicilio.longitud">
               
             </div>
 
@@ -100,7 +98,9 @@
 
           <div class="modal-footer">
             <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Cancelar</button>
-            <button [disabled]="!forma.valid" class="btn btn-primary" type="submit" data-dismiss="modal">Guardar</button>
+
+            <button [disabled]="!forma.valid" class="btn btn-primary" type="submit">Guardar</button>
+
           </div>
         </form>
       </div>
