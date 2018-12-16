@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
-import { DomicilioService } from 'src/app/services/domicilio.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClienteService } from 'src/app/services/clientes.service';
 import { Cliente, Domicilio } from 'src/app/shared/sdk';
-import { ClientesComponent } from '../clientes.component';
 
 @Component({
   selector: 'app-agregar-cliente',
