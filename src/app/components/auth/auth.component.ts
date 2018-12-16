@@ -55,9 +55,9 @@ export class AuthComponent implements OnInit {
   }
 
   public signUp() {
-    console.log(this.usuario);
     this.authService.create(this.usuario)
-      .subscribe(res => {
+      .subscribe((res: Usuarios) => {
+        console.log(res);
         this.isValidSignUp = true;
         this.router.navigate(['/home'], { replaceUrl: true });
       },
@@ -69,10 +69,9 @@ export class AuthComponent implements OnInit {
   }
 
   public logIn() {
-    console.log(this.usuario);
     this.authService.login(this.usuario)
-      .subscribe(user => {
-        console.log("USUARIO => " + user);
+      .subscribe((user: Usuarios) => {
+        console.log(user);
         this.isValidLogIn = true;
         this.router.navigate(['/home'], { replaceUrl: true });
       },

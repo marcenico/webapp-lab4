@@ -7,11 +7,11 @@
           <div class="card-body">
 
             <form (ngSubmit)="signUp()" [formGroup]="formaRegistro">
-
+              <!-- Registro - Nombre -->
               <div class="form-group">
                 <label for="nameSU">Ingrese nombre</label>
                 <input class="form-control" type="text" placeholder="Ingrese su nombre" formControlName="nameSU"
-                  [ngClass]="{'ng-valid': formaRegistro.get('nameSU').valid}">
+                  [ngClass]="{'ng-valid': formaRegistro.get('nameSU').valid}" [(ngModel)]="usuario.name">
 
                 <div class="alert alert-warning" *ngIf="formaRegistro.get('nameSU').errors?.required && formaRegistro.get('nameSU').dirty">
                   * Este campo es requerido
@@ -22,11 +22,11 @@
                 </div>
               </div>
 
-
+              <!-- Registro - Email -->
               <div class="form-group">
                 <label for="emailSU">Ingrese email</label>
                 <input type="email" class="form-control" placeholder="Ingrese email" formControlName="emailSU"
-                  [ngClass]="{'ng-valid': formaRegistro.get('emailSU').valid}">
+                  [ngClass]="{'ng-valid': formaRegistro.get('emailSU').valid}" [(ngModel)]="usuario.email">
 
                 <div class="alert alert-warning" *ngIf="formaRegistro.get('emailSU').errors?.required && formaRegistro.get('emailSU').dirty">
                   * Este campo es requerido
@@ -43,10 +43,11 @@
                 </div>
               </div>
 
+              <!-- Registro - Password -->
               <div class="form-group">
                 <label for="passwordSU">Ingrese contraseña</label>
                 <input class="form-control" type="password" placeholder="Ingrese su contraseña" formControlName="passwordSU"
-                  [ngClass]="{'ng-valid': formaRegistro.get('passwordSU').valid}">
+                  [ngClass]="{'ng-valid': formaRegistro.get('passwordSU').valid}" [(ngModel)]="usuario.password">
 
                 <div class="alert alert-warning" *ngIf="formaRegistro.get('passwordSU').errors?.required && formaRegistro.get('passwordSU').dirty">
                   * Este campo es requerido
@@ -57,6 +58,7 @@
                 </div>
               </div>
 
+              <!-- Boton SignUp -->
               <button [disabled]="!formaRegistro.valid" type="submit" class="btn btn-success btn-block">Registrarse</button>
 
               <div class="text-center">
@@ -76,10 +78,11 @@
           <div class="card-body">
             <form (ngSubmit)="logIn()" [formGroup]="formaLogin">
 
+              <!-- Login - Email -->
               <div class="form-group">
                 <label for="emailLI">Ingrese su email</label>
                 <input type="email" class="form-control" placeholder="Ingrese email" formControlName="emailLI"
-                  [ngClass]="{'ng-valid': formaLogin.get('emailLI').valid}">
+                  [ngClass]="{'ng-valid': formaLogin.get('emailLI').valid}" [(ngModel)]="usuario.email">
 
                 <div class="alert alert-warning" *ngIf="formaLogin.get('emailLI').errors?.required && formaLogin.get('emailLI').dirty">
                   * Este campo es requerido
@@ -88,18 +91,13 @@
                 <div class="alert alert-warning" *ngIf="formaLogin.get('emailLI').errors?.pattern">
                   * No cumple con el formato de correo
                 </div>
-
-                <div *ngIf="!isValidLogIn">
-                  <div class="alert alert-danger">
-                    * Error! ya existe un registro con este email
-                  </div>
-                </div>
               </div>
 
+              <!-- Login - Password -->
               <div class="form-group">
                 <label for="passwordLI">Ingrese su contraseña</label>
                 <input class="form-control" type="password" placeholder="Ingrese su contraseña" formControlName="passwordLI"
-                  [ngClass]="{'ng-valid': formaLogin.get('passwordLI').valid}">
+                  [ngClass]="{'ng-valid': formaLogin.get('passwordLI').valid}" [(ngModel)]="usuario.password">
 
                 <div class="alert alert-warning" *ngIf="formaLogin.get('passwordLI').errors?.required && formaLogin.get('passwordLI').dirty">
                   * Este campo es requerido
@@ -110,6 +108,7 @@
                 </div>
               </div>
 
+              <!-- Boton - Login -->
               <button [disabled]="!formaLogin.valid" type="submit" class="btn btn-primary btn-block">Iniciar Sesion</button>
 
               <div *ngIf="!isValidLogIn"><br>
