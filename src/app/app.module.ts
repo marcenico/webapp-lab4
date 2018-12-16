@@ -41,7 +41,8 @@ import { InternalStorage } from './shared/sdk/storage/storage.swaps';
     HttpClientModule,
     AppRoutingModule,
     DataTablesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
   providers: [DomicilioApi, UsuariosApi, ClienteApi, HttpClientModule, SDKModels, InternalStorage, LoopBackAuth],
   bootstrap: [AppComponent]
