@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DomicilioApi, Domicilio } from '../shared/sdk';
+import { DomicilioApi, Domicilio, Cliente } from '../shared/sdk';
 import { Observable } from 'rxjs';
 import { LoopBackFilter } from '../../../../webapp/src/app/shared/sdk';
 
@@ -20,6 +20,10 @@ export class DomicilioService {
 
   create(data: Domicilio): Observable<Domicilio> {
     return this.domicilioApi.create(data);
+  }
+
+  createClienteWithDomicilio(id: number, cliente: Cliente): Observable<Domicilio> {
+    return this.domicilioApi.createCliente_domicilio(id, cliente);
   }
 
   update(data: Domicilio): Observable<Domicilio> {
