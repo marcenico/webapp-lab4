@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ClienteService } from 'src/app/services/clientes.service';
 import { Cliente, Domicilio } from 'src/app/shared/sdk';
+import { DomicilioService } from 'src/app/services/domicilio.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agregar-cliente',
@@ -12,12 +14,12 @@ export class AgregarClienteComponent implements OnInit {
   forma: FormGroup;
   private domicilio: Domicilio = new Domicilio();
 
-  constructor(private clienteService: ClienteService) {
+  constructor(private clienteService: ClienteService, private domService: DomicilioService, private router: Router) {
     this.domicilio.cliente_domicilio = new Cliente();
     this.domicilio.cliente_domicilio.saldo = 0;
     this.validarFormulario();
   }
-  
+
   ngOnInit() {
   }
 
@@ -36,7 +38,17 @@ export class AgregarClienteComponent implements OnInit {
 
   public agregarCliente() {
     console.log(this.domicilio);
-    this.clienteService.create(this.domicilio);
+    this.clienteService.create(this.domicilio)
+      .subscribe((dom: Domicilio) => {
+        console.log("Domicilio creado");
+        this.domService.createClienteWithDomicilio(dom.id, this.domicilio.cliente_domicilio)
+          .subscribe(res => {
+            console.log("Domicilio con cliente asociado");
+            console.log(res);
+            this.router.navigate(['/clientes'], { replaceUrl: true });
+          });
+
+      });;
   }
 
 }

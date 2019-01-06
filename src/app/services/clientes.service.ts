@@ -23,18 +23,8 @@ export class ClienteService {
     return this.clienteApi.findById(id);
   }
 
-  create(data: Domicilio) {
-    return this.domService.create(data).
-      subscribe((dom: Domicilio) => {
-        console.log("Domicilio creado");
-        this.domService.createClienteWithDomicilio(dom.id, data.cliente_domicilio)
-        .subscribe(res => {
-          console.log("Domicilio con cliente asociado");
-          console.log(res);
-          });
-
-      });
-    ;
+  create(data: Domicilio):Observable<Domicilio> {
+    return this.domService.create(data);
   }
 
   update(data: Cliente): Observable<Cliente> {

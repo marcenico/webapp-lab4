@@ -1,0 +1,31 @@
+<div class="col">
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-fw fa-folder"></i>
+            <span class="text-dark"> Administracion de registros:</span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+            <h6 class="dropdown-header">Registros:</h6>
+            <button class="dropdown-item btn btn-link" [routerLink]="['/clientes']" routerLinkActive="router-link-active" >
+              <i class="fas fa-table"></i> Clientes
+            </button>
+            <button class="dropdown-item btn btn-link" [routerLink]="['/articulos']" routerLinkActive="router-link-active" >
+              <i class="fas fa-table"></i> Articulos
+            </button>
+            <button class="dropdown-item btn btn-link" (click)="currentPage = 3" role="link">
+              <i class="fas fa-table"></i> Rubros
+            </button>
+            <button class="dropdown-item btn btn-link" (click)="currentPage = 4" role="link">
+              <i class="fas fa-table"></i> Pedidos
+            </button>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item btn btn-link" [routerLink]="['/home']" routerLinkActive="router-link-active" >Pagina Principal</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>

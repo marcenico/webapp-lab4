@@ -1,11 +1,19 @@
-<div class="container">
+<div class="container-fluid">
+
+  <!-- NAVBAR -->
+  <app-navbar></app-navbar>
+  <br>
   <div class="row">
+
+    <!-- SIDEBAR -->
+    <app-sidebar></app-sidebar>
+
     <div class="col">
       <div class="card shadow">
         <div class="card-body">
           <h3><i class="fas fa-table"></i> Registro de clientes</h3>
-          <button [routerLink]="['/cliente/1']" routerLinkActive="router-link-active"  class="btn btn-sm btn-warning text-white" style="float: right;"><i
-              class="fas fa-plus-circle"></i>Agregar Cliente</button>
+          <button [routerLink]="['/clientes/cliente/1']" routerLinkActive="router-link-active" class="btn btn-sm btn-warning text-white"
+            style="float: right;"><i class="fas fa-plus-circle"></i>Agregar Cliente</button>
           <div class="table-responsive">
             <table id="example" class="table table-sm " datatable="" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
               <thead class="thead-light">
@@ -48,4 +56,8 @@
 
     </div>
   </div>
+
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+
 </div>

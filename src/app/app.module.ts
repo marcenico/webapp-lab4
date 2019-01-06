@@ -23,6 +23,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { UsuariosApi, LoopBackAuth, ClienteApi, DomicilioApi } from './shared/sdk';
 import { SDKModels } from './shared/sdk/services/custom/SDKModels';
 import { InternalStorage } from './shared/sdk/storage/storage.swaps';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 //#endregion
 
 @NgModule({
@@ -34,7 +35,8 @@ import { InternalStorage } from './shared/sdk/storage/storage.swaps';
     ArticulosComponent,
     NavbarComponent,
     AgregarClienteComponent,
-    FooterComponent
+    FooterComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
