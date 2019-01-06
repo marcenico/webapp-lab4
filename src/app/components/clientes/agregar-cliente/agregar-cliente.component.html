@@ -1,110 +1,117 @@
-<!-- Agregar Cliente Modal-->
-<div class="modal fade bd-example-modal-lg" id="agregarCliente" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content shadow">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"> <i class="fas fa-home"></i> Nuevo Cliente</h5>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form (ngSubmit)="agregarCliente()" [formGroup]="forma">
+<app-navbar></app-navbar>
+<div class="container">
+  <br><br>
+  <div class="row">
+    <div class="col align-self-center shadow">
+      <button [routerLink]="['/home']" routerLinkActive="router-link-active"  class="close" type="button">
+        <span aria-hidden="true">×</span>
+      </button>
+      <h5><i class="fas fa-home"></i> Nuevo Cliente</h5>
 
-          <div class="form-row">
-            <!-- Razon Social -->
-            <div class="form-group col-md-4">
-              <label for="razonSocial">Razon Social</label>
-              <input type="text" class="form-control" id="razonSocial" placeholder="Razon social..." formControlName="razonSocial" [(ngModel)]="domicilio.cliente_domicilio.razonSocial">
+      <form (ngSubmit)="agregarCliente()" [formGroup]="forma">
 
-              <div class="alert alert-warning" *ngIf="forma.get('razonSocial').errors?.required && forma.get('razonSocial').dirty">
-                * Este campo es requerido
-              </div>
-            </div>
+        <div class="form-row">
+          <!-- Razon Social -->
+          <div class="form-group col-md-4">
+            <label for="razonSocial">Razon Social</label>
+            <input type="text" class="form-control" id="razonSocial" placeholder="Razon social..." formControlName="razonSocial"
+              [(ngModel)]="domicilio.cliente_domicilio.razonSocial">
 
-            <!-- Cuit -->
-            <div class="form-group col-md-4">
-              <label for="cuit">Cuit</label>
-              <input type="text" class="form-control" id="cuit" placeholder="Cuit..." formControlName="cuit" [(ngModel)]="domicilio.cliente_domicilio.cuit">
-
-              <div class="alert alert-warning" *ngIf="forma.get('cuit').errors?.required && forma.get('cuit').dirty">
-                * Este campo es requerido
-              </div>
-            </div>
-
-            <!-- Saldo -->
-            <div class="form-group col-md-4">
-              <label for="saldo">Saldo</label>
-              <input type="number" class="form-control" id="saldo" placeholder="Saldo..." formControlName="saldo" [(ngModel)]="domicilio.cliente_domicilio.saldo">
-            </div>
-          </div>
-
-          <div class="form-row">
-            <!-- Calle -->
-            <div class="form-group col-md-9">
-              <label for="calle">Calle</label>
-              <input type="text" class="form-control" id="calle" placeholder="Calle..." formControlName="calle" [(ngModel)]="domicilio.calle">
-
-              <div class="alert alert-warning" *ngIf="forma.get('calle').errors?.required && forma.get('calle').dirty">
-                * Este campo es requerido
-              </div>
-            </div>
-
-            <!-- Numero -->
-            <div class="form-group col-md-3">
-              <label for="numero">Numero</label>
-              <input type="number" class="form-control" id="numero" placeholder="Numero..." formControlName="numero" [(ngModel)]="domicilio.numero">
-
-              <div class="alert alert-warning" *ngIf="forma.get('numero').errors?.required && forma.get('numero').dirty">
-                * Este campo es requerido
-              </div>
-            </div>
-
-          </div>
-
-          <div class="form-row">
-            <!-- Localidad -->
-            <div class="form-group col-md-6">
-              <label for="localidad">Localidad</label>
-              <input type="text" class="form-control" id="localidad" placeholder="Localidad..." formControlName="localidad" [(ngModel)]="domicilio.localidad">
-
-              <div class="alert alert-warning" *ngIf="forma.get('localidad').errors?.required && forma.get('localidad').dirty">
-                * Este campo es requerido
-              </div>
-            </div>
-
-            <!-- Latitud -->
-            <div class="form-group col-md-3">
-              <label for="latitud">Latitud</label>
-              <input type="number" class="form-control" id="latitud" placeholder="Latitud..." formControlName="latitud" maxlength="10" [(ngModel)]="domicilio.latitud">
-
-              <div class="alert alert-warning" *ngIf="forma.get('latitud').errors?.required && forma.get('latitud').dirty">
-                * Este campo es requerido
-              </div>
-            </div>
-
-            <!-- Longitud -->
-            <div class="form-group col-md-3">
-              <label for="longitud">Longitud</label>
-              <input type="number" class="form-control" id="longitud" placeholder="Longitud..." formControlName="longitud" maxlength="10" [(ngModel)]="domicilio.longitud">
-              
-            </div>
-
-            <div class="alert alert-warning" *ngIf="forma.get('longitud').errors?.required && forma.get('longitud').dirty">
+            <div class="alert alert-warning" *ngIf="forma.get('razonSocial').errors?.required && forma.get('razonSocial').dirty">
               * Este campo es requerido
             </div>
           </div>
 
-          <div class="modal-footer">
-            <button class="btn btn-outline-secondary" type="button" data-dismiss="modal">Cancelar</button>
+          <!-- Cuit -->
+          <div class="form-group col-md-4">
+            <label for="cuit">Cuit</label>
+            <input type="text" class="form-control" id="cuit" placeholder="Cuit..." formControlName="cuit" [(ngModel)]="domicilio.cliente_domicilio.cuit">
 
-            <button [disabled]="!forma.valid" class="btn btn-primary" type="submit">Guardar</button>
+            <div class="alert alert-warning" *ngIf="forma.get('cuit').errors?.required && forma.get('cuit').dirty">
+              * Este campo es requerido
+            </div>
+          </div>
+
+          <!-- Saldo -->
+          <div class="form-group col-md-4">
+            <label for="saldo">Saldo</label>
+            <input type="number" class="form-control" id="saldo" placeholder="Saldo..." formControlName="saldo"
+              [(ngModel)]="domicilio.cliente_domicilio.saldo">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <!-- Calle -->
+          <div class="form-group col-md-9">
+            <label for="calle">Calle</label>
+            <input type="text" class="form-control" id="calle" placeholder="Calle..." formControlName="calle"
+              [(ngModel)]="domicilio.calle">
+
+            <div class="alert alert-warning" *ngIf="forma.get('calle').errors?.required && forma.get('calle').dirty">
+              * Este campo es requerido
+            </div>
+          </div>
+
+          <!-- Numero -->
+          <div class="form-group col-md-3">
+            <label for="numero">Numero</label>
+            <input type="number" class="form-control" id="numero" placeholder="Numero..." formControlName="numero"
+              [(ngModel)]="domicilio.numero">
+
+            <div class="alert alert-warning" *ngIf="forma.get('numero').errors?.required && forma.get('numero').dirty">
+              * Este campo es requerido
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form-row">
+          <!-- Localidad -->
+          <div class="form-group col-md-6">
+            <label for="localidad">Localidad</label>
+            <input type="text" class="form-control" id="localidad" placeholder="Localidad..." formControlName="localidad"
+              [(ngModel)]="domicilio.localidad">
+
+            <div class="alert alert-warning" *ngIf="forma.get('localidad').errors?.required && forma.get('localidad').dirty">
+              * Este campo es requerido
+            </div>
+          </div>
+
+          <!-- Latitud -->
+          <div class="form-group col-md-3">
+            <label for="latitud">Latitud</label>
+            <input type="number" class="form-control" id="latitud" placeholder="Latitud..." formControlName="latitud"
+              maxlength="10" [(ngModel)]="domicilio.latitud">
+
+            <div class="alert alert-warning" *ngIf="forma.get('latitud').errors?.required && forma.get('latitud').dirty">
+              * Este campo es requerido
+            </div>
+          </div>
+
+          <!-- Longitud -->
+          <div class="form-group col-md-3">
+            <label for="longitud">Longitud</label>
+            <input type="number" class="form-control" id="longitud" placeholder="Longitud..." formControlName="longitud"
+              maxlength="10" [(ngModel)]="domicilio.longitud">
 
           </div>
-        </form>
-      </div>
+
+          <div class="alert alert-warning" *ngIf="forma.get('longitud').errors?.required && forma.get('longitud').dirty">
+            * Este campo es requerido
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button [routerLink]="['/home']" routerLinkActive="router-link-active"  class="btn btn-outline-secondary" type="button">Cancelar</button>
+
+          <button [disabled]="!forma.valid" class="btn btn-outline-primary" type="submit">Guardar</button>
+
+        </div>
+      </form>
 
     </div>
   </div>
+</div>
+<div class="container-fluid">
+  <app-footer></app-footer>
 </div>
