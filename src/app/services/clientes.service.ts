@@ -27,8 +27,8 @@ export class ClienteService {
     return this.domService.create(data);
   }
 
-  update(data: Cliente): Observable<Cliente> {
-    return this.clienteApi.patchAttributes(data.id, data);
+  update(data: Cliente, id: string): Observable<Cliente> {
+    return this.clienteApi.patchAttributes(id, data);
   }
 
   delete(data: Cliente): Observable<Cliente> {

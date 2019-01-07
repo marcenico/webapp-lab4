@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { DomicilioService } from '../../services/domicilio.service';
-import { Domicilio } from '../../shared/sdk';
+import { Domicilio, Cliente } from '../../shared/sdk';
 import * as $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-bs4';
+import { ClienteService } from 'src/app/services/clientes.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-clientes',
@@ -16,8 +18,10 @@ export class ClientesComponent implements OnInit, OnDestroy {
     dtOptions: DataTables.Settings = {};
     dtTrigger: Subject<any> = new Subject();
     dataTable: any;
+
     constructor(
-        private domicilioService: DomicilioService, private chRef: ChangeDetectorRef
+        private clienteService: ClienteService, private domicilioService: DomicilioService, private chRef: ChangeDetectorRef,
+        private route: Router
     ) { }
 
     ngOnInit(): void {
@@ -36,7 +40,7 @@ export class ClientesComponent implements OnInit, OnDestroy {
         this.dtOptions.language = Lang.lang;
         this.domicilioService.getAll({ include: 'cliente_domicilio' })
             .subscribe((data: Domicilio[]) => {
-                console.log(data);
+                //console.log("Lista de clientes", data);
                 for (let i = 0; i < data.length; i++) {
                     if (data[i].cliente_domicilio != null) {
                         this.clientesDomicilio[i] = data[i];
@@ -52,6 +56,27 @@ export class ClientesComponent implements OnInit, OnDestroy {
             });
     }
 
+    borrar(domicilio: Domicilio) {
+        console.log(domicilio);
+        this.clienteService.delete(domicilio.cliente_domicilio)
+            .subscribe(() => {
+                this.domicilioService.delete(domicilio)
+                    .subscribe(res => {
+                        //this.ArmarTabla();
+                        console.log(res);
+                        this.deleteRow(domicilio.id);
+
+                    }, error => console.error(error));
+            }, error => console.error(error));
+    }
+
+    deleteRow(id: number) {
+        for (let i = 0; i < this.clientesDomicilio.length; ++i) {
+            if (this.clientesDomicilio[i].id === id) {
+                this.clientesDomicilio.splice(i, 1);
+            }
+        }
+    }
 
 }
 
