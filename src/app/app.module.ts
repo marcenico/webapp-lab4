@@ -15,7 +15,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { ArticulosComponent } from './components/articulos/articulos.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { AgregarClienteComponent } from './components/clientes/agregar-cliente/agregar-cliente.component';
+import { ClienteComponent } from './components/clientes/cliente/cliente.component';
 import { FooterComponent } from './components/footer/footer.component';
 //#endregion
 
@@ -34,7 +34,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     ClientesComponent,
     ArticulosComponent,
     NavbarComponent,
-    AgregarClienteComponent,
+    ClienteComponent,
     FooterComponent,
     SidebarComponent
   ],
