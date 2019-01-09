@@ -1,0 +1,67 @@
+<!-- NAVBAR -->
+<app-navbar></app-navbar>
+
+<div class="container-fluid">
+  <br>
+  <div class="row">
+
+    <!-- SIDEBAR -->
+    <app-sidebar></app-sidebar>
+
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-body">
+          <h4><i class="fas fa-table"></i> Registro de pedidos</h4>
+          <button [routerLink]="['/pedidos/pedido/new']" routerLinkActive="router-link-active" class="btn btn-sm btn-warning text-white"
+            style="float: right;"><i class="fas fa-plus-circle"></i>Agregar Pedido</button>
+          <div class="table-responsive">
+            <table id="example" class="table table-sm " datatable="" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nº de pedido</th>
+                  <th scope="col">Fecha de pedido</th>
+                  <th scope="col">Fecha de entrega</th>
+                  <th scope="col">Gastos de envío</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Entregado</th>
+                  <th scope="col">Sub Total</th>
+                  <th scope="col">Monto Total</th>
+                  <th scope="col">Editar</th>
+                  <th scope="col">Eliminar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let pedido of pedidosDomicilio; let i = index" [attr.id]="pedido.id">
+                  <th scope="col">{{i+1}}</th>
+                  <td>{{pedido.pedido-venta-domicilio.nroDePedido}}</td>
+                  <td>{{pedido.pedido-venta-domicilio.fechaDePedido}}</td>
+                  <td>{{pedido.pedido-venta-domicilio.fechaDeEntrega}}</td>
+                  <td>{{pedido.pedido-venta-domicilio.gastosDeEnvio}}</td>
+                  <td>{{pedido.pedido-venta-domicilio.estado}}</td>
+                  <td><input class="form-check-input" type="checkbox" value="pedido.pedido-venta-domicilio.entregado"></td>
+                  <td>{{pedido.pedido-venta-domicilio.subTotal}}</td>
+                  <td>{{pedido.pedido-venta-domicilio.montoTotal}}</td>
+
+                  <td><button [routerLink]="['/pedidos/pedido', pedido.id]" routerLinkActive="router-link-active" type="button"
+                      class="btn btn-sm btn-info">
+                      <span class="fas fa-edit"></span>
+                    </button></td>
+                  <td><button type="button" class="btn btn-sm btn-danger" (click)="borrar(pedido)">
+                      <span class="fas fa-trash-alt"></span>
+                    </button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+
+</div>

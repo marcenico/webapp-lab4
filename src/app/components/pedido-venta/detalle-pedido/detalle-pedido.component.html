@@ -1,0 +1,135 @@
+<!-- NAVBAR -->
+<app-navbar></app-navbar>
+
+<div class="container">
+  <br><br>
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col align-self-center shadow">
+      <button [routerLink]="['/pedido-venta']" routerLinkActive="router-link-active" class="close" type="button">
+        <span aria-hidden="true">×</span>
+      </button>
+      <br>
+      <h5><i class="fas fa-home"></i>{{accion}}</h5>
+
+      <form (ngSubmit)="guardar()" [formGroup]="forma">
+
+        <div class="form-row">
+          <!-- Nro Pedido -->
+          <div class="form-group col-md-4">
+            <label for="nroDePedido">Nº Pedido</label>
+            <input type="text" class="form-control" id="nroDePedido" placeholder="Numoero de pedido" formControlName="nroDePedido"
+              [(ngModel)]="pedido.pedido_venta_domicilio.nroDePedido">
+
+            <div class="alert alert-warning" *ngIf="forma.get('nroDePedido').errors?.required && forma.get('nroDePedido').dirty">
+              * Este campo es requerido
+            </div>
+          </div>
+
+          <!-- Fecha estimada de entrega -->
+          <div class="form-group col-md-8">
+            <label for="fechaEstimadaEntrega">Fecha de entrega </label>
+
+            <button class="btn" *ngIf="showCalendar" (click)="refresh(false)">&#x25B2;</button>
+            <button class="btn" *ngIf="!showCalendar" (click)="refresh(true)">&#x25BC;</button>
+
+            <div class="border" *ngIf="showCalendar">
+              <dl-date-time-picker maxView="year" minView="hour" startView="day" minuteStep="59" [(ngModel)]="pedido.pedido_venta_domicilio.fechaEstimadaEntrega"
+                formControlName="fechaEstimadaEntrega" (change)="onCustomDateChange($event)"></dl-date-time-picker>
+            </div>
+
+            <p *ngIf="!forma.get('fechaEstimadaEntrega').errors?.required">{{pedido.pedido_venta_domicilio.fechaEstimadaEntrega
+              | date:'short'}}</p>
+
+            <div class="alert alert-warning" *ngIf="forma.get('fechaEstimadaEntrega').errors?.required">
+              * Este campo es requerido
+            </div>
+          </div>
+
+          <!-- Saldo -->
+          <!-- <div class="form-group col-md-4">
+            <label for="saldo">Saldo</label>
+            <input type="number" class="form-control" id="saldo" placeholder="Saldo..." formControlName="saldo"
+              [(ngModel)]="domicilio.cliente_domicilio.saldo">
+          </div> -->
+        </div>
+
+        <div class="form-row">
+          <!-- Calle -->
+          <!-- <div class="form-group col-md-9">
+            <label for="calle">Calle</label>
+            <input type="text" class="form-control" id="calle" placeholder="Calle..." formControlName="calle"
+              [(ngModel)]="domicilio.calle">
+
+            <div class="alert alert-warning" *ngIf="forma.get('calle').errors?.required && forma.get('calle').dirty">
+              * Este campo es requerido
+            </div>
+          </div> -->
+
+          <!-- Numero -->
+          <!-- <div class="form-group col-md-3">
+            <label for="numero">Numero</label>
+            <input type="number" class="form-control" id="numero" placeholder="Numero..." formControlName="numero"
+              [(ngModel)]="domicilio.numero">
+
+            <div class="alert alert-warning" *ngIf="forma.get('numero').errors?.required && forma.get('numero').dirty">
+              * Este campo es requerido
+            </div>
+          </div> -->
+
+        </div>
+
+        <div class="form-row">
+          <!-- Localidad -->
+          <!-- <div class="form-group col-md-6">
+            <label for="localidad">Localidad</label>
+            <input type="text" class="form-control" id="localidad" placeholder="Localidad..." formControlName="localidad"
+              [(ngModel)]="domicilio.localidad">
+
+            <div class="alert alert-warning" *ngIf="forma.get('localidad').errors?.required && forma.get('localidad').dirty">
+              * Este campo es requerido
+            </div>
+          </div> -->
+
+          <!-- Latitud -->
+          <!-- <div class="form-group col-md-3">
+            <label for="latitud">Latitud</label>
+            <input type="number" class="form-control" id="latitud" placeholder="Latitud..." formControlName="latitud"
+              maxlength="10" [(ngModel)]="domicilio.latitud">
+
+            <div class="alert alert-warning" *ngIf="forma.get('latitud').errors?.required && forma.get('latitud').dirty">
+              * Este campo es requerido
+            </div>
+          </div> -->
+
+          <!-- Longitud -->
+          <!-- <div class="form-group col-md-3">
+            <label for="longitud">Longitud</label>
+            <input type="number" class="form-control" id="longitud" placeholder="Longitud..." formControlName="longitud"
+              maxlength="10" [(ngModel)]="domicilio.longitud">
+
+          </div> -->
+          <!-- 
+          <div class="alert alert-warning" *ngIf="forma.get('longitud').errors?.required && forma.get('longitud').dirty">
+            * Este campo es requerido
+          </div> -->
+        </div>
+
+        <div class="modal-footer">
+          <button [routerLink]="['/pedidos']" routerLinkActive="router-link-active" class="btn btn-outline-secondary"
+            type="button">Cancelar</button>
+
+          <!-- <button [disabled]="!forma.valid" class="btn btn-outline-primary" type="submit">Guardar</button> -->
+
+        </div>
+      </form>
+
+    </div>
+    <div class="col-1"></div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <!-- FOOTER -->
+  <app-footer></app-footer>
+</div>
