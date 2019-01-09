@@ -19,7 +19,7 @@
             <button class="dropdown-item btn btn-link" (click)="currentPage = 3" role="link">
               <i class="fas fa-table"></i> Rubros
             </button>
-            <button class="dropdown-item btn btn-link" (click)="currentPage = 4" role="link">
+            <button class="dropdown-item btn btn-link" [routerLink]="['/pedidos']" routerLinkActive="router-link-active" >
               <i class="fas fa-table"></i> Pedidos
             </button>
             <div class="dropdown-divider"></div>
