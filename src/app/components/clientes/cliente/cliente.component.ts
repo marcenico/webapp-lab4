@@ -47,7 +47,7 @@ export class ClienteComponent implements OnInit {
     this.forma = new FormGroup({
       'razonSocial': new FormControl('', [Validators.required]),
       'cuit': new FormControl('', [Validators.required]),
-      'saldo': new FormControl('', []),
+      // 'saldo': new FormControl('', []),
       'calle': new FormControl('', [Validators.required]),
       'numero': new FormControl('', [Validators.required]),
       'localidad': new FormControl('', [Validators.required]),
