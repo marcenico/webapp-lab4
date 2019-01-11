@@ -1,20 +1,20 @@
-
 <!-- NAVBAR-->
 <app-navbar></app-navbar>
 
-<div class="container-fluid">
-  
+<div class="container">
+
   <br>
   <div class="row">
-    
+
     <!-- SIDEBAR -->
     <app-sidebar></app-sidebar>
-    
+
     <div class="col">
       <div id="content-wrapper">
-        <div class="shadow d-none d-md-block">
+        <div class="shadow">
           <div class="jumbotron" *ngIf="currentPage == 5">
-            <h1 class="display-3">Bienvenido!</h1>
+            <h3>Bienvenido!</h3>
+            <hr class="my-2">
             <p class="lead">Esta es una pagina administrativa.
               Aqui puedes dar de alta a clientes, articulos, su rubro y pedidos de venta
               Tambien puedes editar/cambiar y eliminar los registros que desees.
@@ -24,8 +24,8 @@
       </div>
     </div>
   </div>
-  
-  <!-- FOOTER -->
-  <app-footer></app-footer>
-  
+
 </div>
+
+<!-- FOOTER -->
+<app-footer></app-footer>

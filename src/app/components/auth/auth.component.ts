@@ -1,8 +1,6 @@
 import { Router } from '@angular/router';
-import { Component, OnInit, Inject } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { DOCUMENT } from '@angular/platform-browser';
 import { Usuarios } from 'src/app/shared/sdk';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 
@@ -25,32 +23,32 @@ export class AuthComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    @Inject(DOCUMENT) private document: Document
+    private elementRef: ElementRef
   ) {
     this.validarRegistro();
     this.validarInicioSesion();
   }
 
   ngOnInit() {
-    this.document.body.classList.add('bg-dark')
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = "#5b5b5b";
   }
 
   ngOnDestroy() {
-    this.document.body.classList.remove('bg-dark')
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = "#fcfcff";
   }
 
   validarRegistro() {
     this.formaRegistro = new FormGroup({
-      'nameSU': new FormControl('', [Validators.required, Validators.minLength(3)]),
-      'passwordSU': new FormControl('', [Validators.required, Validators.minLength(8)]),
-      'emailSU': new FormControl('', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")])
+      nameSU: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      passwordSU: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      emailSU: new FormControl('', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")])
     })
   }
 
   validarInicioSesion() {
     this.formaLogin = new FormGroup({
-      'passwordLI': new FormControl('', [Validators.required, Validators.minLength(8)]),
-      'emailLI': new FormControl('', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")])
+      passwordLI: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      emailLI: new FormControl('', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")])
     })
   }
 

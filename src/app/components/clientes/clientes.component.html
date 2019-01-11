@@ -1,7 +1,7 @@
 <!-- NAVBAR -->
 <app-navbar></app-navbar>
 
-<div class="container-fluid">
+<div class="container">
   <br>
   <div class="row">
 
@@ -40,7 +40,8 @@
                   <td>{{clienteDomicilio.calle}}</td>
                   <td>{{clienteDomicilio.latitud}}</td>
                   <td>{{clienteDomicilio.longitud}}</td>
-                  <td><button [routerLink]="['/clientes/cliente', clienteDomicilio.id]" routerLinkActive="router-link-active"  type="button" class="btn btn-sm btn-info">
+                  <td><button [routerLink]="['/clientes/cliente', clienteDomicilio.id]" routerLinkActive="router-link-active"
+                      type="button" class="btn btn-sm btn-info">
                       <span class="fas fa-edit"></span>
                     </button></td>
                   <td><button type="button" class="btn btn-sm btn-danger" (click)="borrar(clienteDomicilio)">
@@ -56,8 +57,7 @@
 
     </div>
   </div>
-
-  <!-- FOOTER -->
-  <app-footer></app-footer>
-
 </div>
+
+<!-- FOOTER -->
+<app-footer></app-footer>
