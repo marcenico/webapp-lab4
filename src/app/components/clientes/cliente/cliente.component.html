@@ -16,7 +16,7 @@
 
         <div class="form-row">
           <!-- Razon Social -->
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-6">
             <label for="razonSocial">Razon Social</label>
             <input type="text" class="form-control" id="razonSocial" placeholder="Razon social..." formControlName="razonSocial"
               [(ngModel)]="domicilio.cliente_domicilio.razonSocial">
@@ -27,13 +27,17 @@
           </div>
 
           <!-- Cuit -->
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-6">
             <label for="cuit">Cuit</label>
             <input type="text" class="form-control" id="cuit" placeholder="Cuit..." formControlName="cuit" [(ngModel)]="domicilio.cliente_domicilio.cuit">
 
             <div class="alert alert-warning" *ngIf="forma.get('cuit').errors?.required && forma.get('cuit').dirty">
               * Este campo es requerido
             </div>
+
+            <div class="alert alert-warning" *ngIf="forma.get('cuit').errors?.pattern">
+                * No cumple el formato (ej: 20-28564123-9)
+              </div>
           </div>
 
           <!-- Saldo -->
@@ -90,6 +94,11 @@
             <div class="alert alert-warning" *ngIf="forma.get('latitud').errors?.required && forma.get('latitud').dirty">
               * Este campo es requerido
             </div>
+
+            <div class="alert alert-warning" *ngIf="forma.get('latitud').errors?.pattern">
+              * No cumple el formato
+            </div>
+
           </div>
 
           <!-- Longitud -->
@@ -102,6 +111,10 @@
 
           <div class="alert alert-warning" *ngIf="forma.get('longitud').errors?.required && forma.get('longitud').dirty">
             * Este campo es requerido
+          </div>
+
+          <div class="alert alert-warning" *ngIf="forma.get('longitud').errors?.pattern">
+            * No cumple el formato
           </div>
         </div>
 

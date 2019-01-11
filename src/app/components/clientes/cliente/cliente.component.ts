@@ -4,6 +4,7 @@ import { ClienteService } from 'src/app/services/clientes.service';
 import { Cliente, Domicilio } from 'src/app/shared/sdk';
 import { DomicilioService } from 'src/app/services/domicilio.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { StringsRegex } from 'src/app/wrappers/StringsRegex';
 
 @Component({
   selector: 'app-cliente',
@@ -46,13 +47,13 @@ export class ClienteComponent implements OnInit {
   private validarFormulario() {
     this.forma = new FormGroup({
       'razonSocial': new FormControl('', [Validators.required]),
-      'cuit': new FormControl('', [Validators.required]),
+      'cuit': new FormControl('', [Validators.required, Validators.pattern(StringsRegex.cuit)]),
       // 'saldo': new FormControl('', []),
       'calle': new FormControl('', [Validators.required]),
       'numero': new FormControl('', [Validators.required]),
       'localidad': new FormControl('', [Validators.required]),
-      'latitud': new FormControl('', [Validators.required]),
-      'longitud': new FormControl('', [Validators.required])
+      'latitud': new FormControl('', [Validators.required, Validators.pattern(StringsRegex.latitude)]),
+      'longitud': new FormControl('', [Validators.required, Validators.pattern(StringsRegex.longitude)])
     })
   }
 

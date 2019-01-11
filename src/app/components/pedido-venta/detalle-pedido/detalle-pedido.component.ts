@@ -5,6 +5,7 @@ import { PedidoVentaService } from 'src/app/services/pedido-venta.service';
 import { DomicilioService } from 'src/app/services/domicilio.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatesExtension } from 'src/app/wrappers/DatesExtension';
+import { StringsRegex } from 'src/app/wrappers/StringsRegex';
 
 @Component({
   selector: 'app-detalle-pedido',
@@ -22,6 +23,7 @@ export class DetallePedidoComponent implements OnInit {
   dfechaPedido: Date = null;
   showCalendar2 = false;
   dfechaEntrega: Date = null;
+ 
 
   estados = [
     { id: 1, name: "Pendiente" },
@@ -63,7 +65,7 @@ export class DetallePedidoComponent implements OnInit {
 
   private validarFormulario() {
     this.forma = new FormGroup({
-      nroDePedido: new FormControl('', [Validators.required]),
+      nroDePedido: new FormControl('', [Validators.required, Validators.pattern(StringsRegex.onlyNumbers)]),
       fechaPedido: new FormControl('', [Validators.required]),
       fechaEstimadaEntrega: new FormControl('', [Validators.required]),
       gastosDeEnvio: new FormControl('', [Validators.required]),

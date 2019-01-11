@@ -41,14 +41,15 @@ export class AuthComponent implements OnInit {
     this.formaRegistro = new FormGroup({
       nameSU: new FormControl('', [Validators.required, Validators.minLength(3)]),
       passwordSU: new FormControl('', [Validators.required, Validators.minLength(8)]),
-      emailSU: new FormControl('', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")])
+      emailSU: new FormControl('', [Validators.required, Validators.email])
+      
     })
   }
 
   validarInicioSesion() {
     this.formaLogin = new FormGroup({
       passwordLI: new FormControl('', [Validators.required, Validators.minLength(8)]),
-      emailLI: new FormControl('', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")])
+      emailLI: new FormControl('', [Validators.required, Validators.email])
     })
   }
 

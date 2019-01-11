@@ -18,12 +18,16 @@
           <!-- Nro Pedido -->
           <div class="form-group col-md-2">
             <label for="nroDePedido">Nº Pedido</label>
-            <input type="text" class="form-control" id="nroDePedido" placeholder="Numoero de pedido" formControlName="nroDePedido"
+            <input type="number" class="form-control" id="nroDePedido" placeholder="Numoero de pedido" formControlName="nroDePedido"
               [(ngModel)]="pedido.pedido_venta_domicilio.nroDePedido">
 
             <div class="alert alert-warning" *ngIf="forma.get('nroDePedido').errors?.required && forma.get('nroDePedido').dirty">
               * Este campo es requerido
             </div>
+
+            <div class="alert alert-warning" *ngIf="forma.get('nroDePedido').errors?.pattern">
+                * Solo numeros enteros
+              </div>
           </div>
 
           <!-- Fecha Pedido -->
