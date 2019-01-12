@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Domicilio, Pedidoventa } from 'src/app/shared/sdk';
+import { Domicilio, Pedidoventa, Pedidoventadetalle } from 'src/app/shared/sdk';
 import { PedidoVentaService } from 'src/app/services/pedido-venta.service';
 import { DomicilioService } from 'src/app/services/domicilio.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -23,7 +23,6 @@ export class DetallePedidoComponent implements OnInit {
   dfechaPedido: Date = null;
   showCalendar2 = false;
   dfechaEntrega: Date = null;
- 
 
   estados = [
     { id: 1, name: "Pendiente" },
@@ -34,6 +33,7 @@ export class DetallePedidoComponent implements OnInit {
 
 
   private pedido: Domicilio = new Domicilio();
+  private detallePedido: Pedidoventadetalle = new Pedidoventadetalle();
 
   constructor(private pedidoVentaService: PedidoVentaService, private domService: DomicilioService, private router: Router, private route: ActivatedRoute) {
     this.route.params
@@ -41,7 +41,13 @@ export class DetallePedidoComponent implements OnInit {
         this.id = parametros['id'];
         if (this.id === "new") {
           this.accion = " Nuevo Pedido";
+
+
+
           this.pedido.pedido_venta_domicilio = new Pedidoventa();
+          this.pedido.pedido_venta_domicilio.subTotal = 0.0;
+          this.pedido.pedido_venta_domicilio.montoTotal = 0.0;
+          this.pedido.pedido_venta_domicilio.gastosEnvio = 0.0;
           this.validarFormulario();
         } else {
           this.accion = " Actualizando Pedido";
@@ -57,19 +63,21 @@ export class DetallePedidoComponent implements OnInit {
   }
 
   ngOnInit() {
-    // if (this.id === "new") {
-    //   this.selectChange();
-
-    // }
   }
 
   private validarFormulario() {
     this.forma = new FormGroup({
-      nroDePedido: new FormControl('', [Validators.required, Validators.pattern(StringsRegex.onlyNumbers)]),
+      nroDePedido: new FormControl('', [Validators.required, Validators.pattern(StringsRegex.onlyIntegerNumbers)]),
       fechaPedido: new FormControl('', [Validators.required]),
       fechaEstimadaEntrega: new FormControl('', [Validators.required]),
-      gastosDeEnvio: new FormControl('', [Validators.required]),
+      gastosEnvio: new FormControl('', [Validators.required, Validators.pattern(StringsRegex.onlyFloatNumbers)]),
       estado: new FormControl('Pendiente', []),
+      entregado: new FormControl('', []),
+      subTotal: new FormControl('', []),
+      montoTotal: new FormControl('', []),
+      detalleCantidad: new FormControl('', []),
+      detalleSubTotal: new FormControl('', []),
+      detalleDescuento: new FormControl('', []),
     })
   }
 
@@ -102,8 +110,6 @@ export class DetallePedidoComponent implements OnInit {
   }
 
   onCustomDateChange(event) {
-    // console.log(event.value instanceof Date, event.value);
-    // console.log(event.value);
     if (event.value instanceof Date) {
       this.dfechaPedido = event.value;
       let number = DatesExtension.compareDate(this.dfechaPedido, this.dfechaEntrega);
@@ -117,8 +123,6 @@ export class DetallePedidoComponent implements OnInit {
   }
 
   onCustomDateChange2(event) {
-    // console.log(event.value instanceof Date, event.value);
-    // console.log(event.value);
     if (event.value instanceof Date) {
       this.dfechaEntrega = event.value;
       let number = DatesExtension.compareDate(this.dfechaPedido, this.dfechaEntrega);
@@ -133,6 +137,11 @@ export class DetallePedidoComponent implements OnInit {
   selectChange() {
     // console.log(this.estado);
     this.pedido.pedido_venta_domicilio.estado = this.estado;
+    if (this.estado == "Entregado") {
+      this.forma.get('entregado').setValue(true);
+    } else {
+      this.forma.get('entregado').setValue(false);
+    }
   }
 
   get estado(): string {
