@@ -21,6 +21,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { PedidoVentaComponent } from './components/pedido-venta/pedido-venta.component';
 import { DetallePedidoComponent } from './components/pedido-venta/detalle-pedido/detalle-pedido.component';
+import { RubroComponent } from './components/rubro/rubro.component';
 //#endregion
 
 //#region AGREGADAS PARA QUE FUNCIONE EL SDK*/
@@ -42,6 +43,7 @@ import { InternalStorage } from './shared/sdk/storage/storage.swaps';
     SidebarComponent,
     PedidoVentaComponent,
     DetallePedidoComponent,
+    RubroComponent,
   ],
   imports: [
     BrowserModule,
