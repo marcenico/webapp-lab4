@@ -60,6 +60,8 @@ export class ClienteComponent implements OnInit {
   public guardar() {
     // INSERTANDO
     if (this.id === "new") {
+      this.domicilio.createdAt = new Date();
+      this.domicilio.updatedAt = new Date();
       console.log(this.domicilio);
       this.clienteService.create(this.domicilio)
         .subscribe((dom: Domicilio) => {
@@ -73,6 +75,7 @@ export class ClienteComponent implements OnInit {
         });;
     } else {
       // ACTUALIZANDO
+      this.domicilio.updatedAt = new Date();
       console.log("PARA ACTUALIZAR", this.domicilio);
       this.domService.updateClienteWithDomicilio(this.domicilio.id, this.domicilio)
         .subscribe(res => {

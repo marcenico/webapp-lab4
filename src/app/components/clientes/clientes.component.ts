@@ -2,9 +2,6 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { DomicilioService } from '../../services/domicilio.service';
 import { Domicilio, Cliente } from '../../shared/sdk';
-import * as $ from 'jquery';
-import 'datatables.net';
-import 'datatables.net-bs4';
 import { ClienteService } from 'src/app/services/clientes.service';
 import { Router } from '@angular/router';
 

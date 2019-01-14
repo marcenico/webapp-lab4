@@ -21,13 +21,14 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { PedidoVentaComponent } from './components/pedido-venta/pedido-venta.component';
 import { DetallePedidoComponent } from './components/pedido-venta/detalle-pedido/detalle-pedido.component';
-import { RubroComponent } from './components/rubro/rubro.component';
+import { RubrosComponent } from './components/rubros/rubros.component';
 //#endregion
 
 //#region AGREGADAS PARA QUE FUNCIONE EL SDK*/
-import { UsuariosApi, LoopBackAuth, ClienteApi, DomicilioApi, PedidoventaApi } from './shared/sdk';
+import { UsuariosApi, LoopBackAuth, ClienteApi, DomicilioApi, PedidoventaApi, RubroApi, ArticuloApi } from './shared/sdk';
 import { SDKModels } from './shared/sdk/services/custom/SDKModels';
 import { InternalStorage } from './shared/sdk/storage/storage.swaps';
+import { RubroComponent } from './components/rubros/rubro/rubro.component';
 //#endregion
 
 @NgModule({
@@ -43,6 +44,7 @@ import { InternalStorage } from './shared/sdk/storage/storage.swaps';
     SidebarComponent,
     PedidoVentaComponent,
     DetallePedidoComponent,
+    RubrosComponent,
     RubroComponent,
   ],
   imports: [
@@ -56,7 +58,7 @@ import { InternalStorage } from './shared/sdk/storage/storage.swaps';
     ReactiveFormsModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
-  providers: [DomicilioApi, UsuariosApi, ClienteApi, PedidoventaApi, HttpClientModule, SDKModels, InternalStorage, LoopBackAuth],
+  providers: [DomicilioApi, UsuariosApi, ClienteApi, PedidoventaApi, RubroApi, ArticuloApi, HttpClientModule, SDKModels, InternalStorage, LoopBackAuth],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -42,7 +42,7 @@ export class AuthComponent implements OnInit {
       nameSU: new FormControl('', [Validators.required, Validators.minLength(3)]),
       passwordSU: new FormControl('', [Validators.required, Validators.minLength(8)]),
       emailSU: new FormControl('', [Validators.required, Validators.email])
-      
+
     })
   }
 
@@ -54,6 +54,8 @@ export class AuthComponent implements OnInit {
   }
 
   public signUp() {
+    this.usuario.createdAt = new Date();
+    this.usuario.updatedAt = new Date();
     this.authService.create(this.usuario)
       .subscribe((res: Usuarios) => {
         console.log(res);
