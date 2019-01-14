@@ -19,7 +19,7 @@
           <div class="form-group col-md-6">
             <label for="razonSocial">Razon Social</label>
             <input type="text" class="form-control" id="razonSocial" placeholder="Razon social..." formControlName="razonSocial"
-              [(ngModel)]="domicilio.cliente_domicilio.razonSocial">
+              [(ngModel)]="domicilio.cliente.razonSocial">
 
             <div class="alert alert-warning" *ngIf="forma.get('razonSocial').errors?.required && forma.get('razonSocial').dirty">
               * Este campo es requerido
@@ -29,7 +29,7 @@
           <!-- Cuit -->
           <div class="form-group col-md-6">
             <label for="cuit">Cuit</label>
-            <input type="text" class="form-control" id="cuit" placeholder="Cuit..." formControlName="cuit" [(ngModel)]="domicilio.cliente_domicilio.cuit">
+            <input type="text" class="form-control" id="cuit" placeholder="Cuit..." formControlName="cuit" [(ngModel)]="domicilio.cliente.cuit">
 
             <div class="alert alert-warning" *ngIf="forma.get('cuit').errors?.required && forma.get('cuit').dirty">
               * Este campo es requerido
@@ -44,7 +44,7 @@
           <!-- <div class="form-group col-md-4">
             <label for="saldo">Saldo</label>
             <input type="number" class="form-control" id="saldo" placeholder="Saldo..." formControlName="saldo"
-              [(ngModel)]="domicilio.cliente_domicilio.saldo">
+              [(ngModel)]="domicilio.cliente.saldo">
           </div> -->
         </div>
 

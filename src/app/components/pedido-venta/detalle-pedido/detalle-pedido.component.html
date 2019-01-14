@@ -19,7 +19,7 @@
           <div class="form-group col-md-2">
             <label for="nroDePedido">Nº Pedido</label>
             <input type="number" class="form-control" id="nroDePedido" placeholder="Nº de pedido" formControlName="nroDePedido"
-              [(ngModel)]="pedido.pedido_venta_domicilio.nroDePedido">
+              [(ngModel)]="pedido.pedido_venta.nroDePedido">
 
             <div class="alert alert-warning" *ngIf="forma.get('nroDePedido').errors?.required && forma.get('nroDePedido').dirty">
               * Este campo es requerido
@@ -38,13 +38,13 @@
               de pedido &#x25BC;</label>
 
             <div class="border" *ngIf="showCalendar">
-              <dl-date-time-picker maxView="year" minView="hour" startView="day" minuteStep="59" [(ngModel)]="pedido.pedido_venta_domicilio.fechaPedido"
+              <dl-date-time-picker maxView="year" minView="hour" startView="day" minuteStep="59" [(ngModel)]="pedido.pedido_venta.fechaPedido"
                 formControlName="fechaPedido" (change)="onCustomDateChange($event)"></dl-date-time-picker>
             </div>
 
             <div *ngIf="!forma.get('fechaPedido').errors?.required">
               <fieldset disabled>
-                <input type="text" id="fechaPedido" class="form-control" [placeholder]="pedido.pedido_venta_domicilio.fechaPedido
+                <input type="text" id="fechaPedido" class="form-control" [placeholder]="pedido.pedido_venta.fechaPedido
                 | date:'short'">
               </fieldset>
             </div>
@@ -64,13 +64,13 @@
               de entrega &#x25BC;</label>
 
             <div class="border" *ngIf="showCalendar2">
-              <dl-date-time-picker maxView="year" minView="hour" startView="day" minuteStep="59" [(ngModel)]="pedido.pedido_venta_domicilio.fechaEstimadaEntrega"
+              <dl-date-time-picker maxView="year" minView="hour" startView="day" minuteStep="59" [(ngModel)]="pedido.pedido_venta.fechaEstimadaEntrega"
                 formControlName="fechaEstimadaEntrega" (change)="onCustomDateChange2($event)"></dl-date-time-picker>
             </div>
 
             <div *ngIf="!forma.get('fechaEstimadaEntrega').errors?.required">
               <fieldset disabled>
-                <input type="text" id="fechaEstimadaEntrega" class="form-control" [placeholder]="pedido.pedido_venta_domicilio.fechaEstimadaEntrega
+                <input type="text" id="fechaEstimadaEntrega" class="form-control" [placeholder]="pedido.pedido_venta.fechaEstimadaEntrega
                   | date:'short'">
               </fieldset>
             </div>
@@ -90,8 +90,8 @@
           <!-- Gastos de envio -->
           <div class="form-group col-md-3">
             <label for="gastosEnvio">Gastos de envio</label>
-            <input type="number" class="form-control" id="gastosEnvio" [placeholder]="pedido.pedido_venta_domicilio.gastosEnvio"
-              formControlName="gastosEnvio" [(ngModel)]="pedido.pedido_venta_domicilio.gastosEnvio">
+            <input type="number" class="form-control" id="gastosEnvio" [placeholder]="pedido.pedido_venta.gastosEnvio"
+              formControlName="gastosEnvio" [(ngModel)]="pedido.pedido_venta.gastosEnvio">
 
             <div class="alert alert-warning" *ngIf="forma.get('gastosEnvio').errors?.required && forma.get('gastosEnvio').dirty">
               * Este campo es requerido
@@ -115,7 +115,7 @@
             <div class="form-check">
               <fieldset disabled>
                 <input class="form-check-input" type="checkbox" [value]="" id="entregado" formControlName="entregado"
-                  [(ngModel)]="pedido.pedido_venta_domicilio.entregado">
+                  [(ngModel)]="pedido.pedido_venta.entregado">
               </fieldset>
               <label class="form-check-label" for="entregado">
                 Entregado
@@ -130,8 +130,8 @@
           <div class="form-group col-md-2">
               <label for="subTotal">SubTotal</label>
               <fieldset disabled>
-                <input type="text" id="subTotal" class="form-control" [placeholder]="pedido.pedido_venta_domicilio.subTotal"
-                  formControlName="subTotal" [(ngModel)]="pedido.pedido_venta_domicilio.subTotal">
+                <input type="text" id="subTotal" class="form-control" [placeholder]="pedido.pedido_venta.subTotal"
+                  formControlName="subTotal" [(ngModel)]="pedido.pedido_venta.subTotal">
               </fieldset>
             </div>
   
@@ -139,8 +139,8 @@
             <div class="form-group col-md-2">
               <label for="montoTotal">Monto Total</label>
               <fieldset disabled>
-                <input type="text" id="montoTotal" class="form-control" [placeholder]="pedido.pedido_venta_domicilio.montoTotal"
-                  formControlName="montoTotal" [(ngModel)]="pedido.pedido_venta_domicilio.montoTotal">
+                <input type="text" id="montoTotal" class="form-control" [placeholder]="pedido.pedido_venta.montoTotal"
+                  formControlName="montoTotal" [(ngModel)]="pedido.pedido_venta.montoTotal">
               </fieldset>
             </div>
             

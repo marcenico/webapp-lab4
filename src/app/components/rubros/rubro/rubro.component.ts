@@ -33,6 +33,7 @@ export class RubroComponent implements OnInit {
         if (this.id === "new") {
           this.accion = " Nuevo Rubro";
           this.validarFormulario();
+          this.setSelectedRubro(this.rubro);
         } else {
           this.accion = " Actualizando Rubro";
           this.validarFormulario();
@@ -64,8 +65,8 @@ export class RubroComponent implements OnInit {
       this.rubro.createdAt = new Date();
       this.rubro.updatedAt = new Date();
       this.rubroService.create(this.rubro)
-        .subscribe((rubro: Rubro) => {
-          console.log("Rubro creado");
+        .subscribe(res => {
+          console.log("Rubro creado", res);
           this.router.navigate(['/rubros'], { replaceUrl: true });
         }, error => console.error(error));;
     } else {

@@ -35,14 +35,14 @@
               <tbody>
                 <tr *ngFor="let pedido of pedidosDomicilio; let i = index" [attr.id]="pedido.id">
                   <th scope="col">{{i+1}}</th>
-                  <td>{{pedido.pedido-venta-domicilio.nroDePedido}}</td>
-                  <td>{{pedido.pedido-venta-domicilio.fechaDePedido}}</td>
-                  <td>{{pedido.pedido-venta-domicilio.fechaDeEntrega}}</td>
-                  <td>{{pedido.pedido-venta-domicilio.gastosDeEnvio}}</td>
-                  <td>{{pedido.pedido-venta-domicilio.estado}}</td>
-                  <td><input class="form-check-input" type="checkbox" value="pedido.pedido-venta-domicilio.entregado"></td>
-                  <td>{{pedido.pedido-venta-domicilio.subTotal}}</td>
-                  <td>{{pedido.pedido-venta-domicilio.montoTotal}}</td>
+                  <td>{{pedido.pedido-venta.nroDePedido}}</td>
+                  <td>{{pedido.pedido-venta.fechaDePedido}}</td>
+                  <td>{{pedido.pedido-venta.fechaDeEntrega}}</td>
+                  <td>{{pedido.pedido-venta.gastosDeEnvio}}</td>
+                  <td>{{pedido.pedido-venta.estado}}</td>
+                  <td><input class="form-check-input" type="checkbox" value="pedido.pedido-venta.entregado"></td>
+                  <td>{{pedido.pedido-venta.subTotal}}</td>
+                  <td>{{pedido.pedido-venta.montoTotal}}</td>
 
                   <td><button [routerLink]="['/pedidos/pedido', pedido.id]" routerLinkActive="router-link-active" type="button"
                       class="btn btn-sm btn-info">

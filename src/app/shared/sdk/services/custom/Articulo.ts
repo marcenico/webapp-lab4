@@ -123,7 +123,7 @@ export class ArticuloApi extends BaseLoopBackApi {
   }
 
   /**
-   * Fetches belongsTo relation articulo_rubro.
+   * Fetches belongsTo relation rubro.
    *
    * @param {any} id Articulo id
    *
@@ -138,10 +138,10 @@ export class ArticuloApi extends BaseLoopBackApi {
    * This usually means the response is a `Articulo` object.)
    * </em>
    */
-  public getArticulo_rubro(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
+  public getRubro(id: any, refresh: any = {}, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Articulos/:id/articulo_rubro";
+    "/Articulos/:id/rubro";
     let _routeParams: any = {
       id: id
     };

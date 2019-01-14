@@ -36,11 +36,11 @@ export class PedidoVentaComponent implements OnInit {
             processing: true,
         };
         this.dtOptions.language = Lang.lang;
-        this.domicilioService.getAll({ include: 'pedido_venta_domicilio' })
+        this.domicilioService.getAll({ include: 'pedido_venta' })
             .subscribe((data: Domicilio[]) => {
                 //console.log("Lista de clientes", data);
                 for (let i = 0; i < data.length; i++) {
-                    if (data[i].pedido_venta_domicilio != null) {
+                    if (data[i].pedido_venta != null) {
                         this.pedidosDomicilio[i] = data[i];
                     }
                 }
@@ -55,7 +55,7 @@ export class PedidoVentaComponent implements OnInit {
 
     borrar(domicilio: Domicilio) {
         console.log(domicilio);
-        this.pedidoVentaService.delete(domicilio.pedido_venta_domicilio)
+        this.pedidoVentaService.delete(domicilio.pedido_venta)
             .subscribe(() => {
                 this.domicilioService.delete(domicilio)
                     .subscribe(res => {

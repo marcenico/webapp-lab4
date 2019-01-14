@@ -35,11 +35,11 @@ export class ClientesComponent implements OnInit, OnDestroy {
             processing: true,
         };
         this.dtOptions.language = Lang.lang;
-        this.domicilioService.getAll({ include: 'cliente_domicilio' })
+        this.domicilioService.getAll({ include: 'cliente' })
             .subscribe((data: Domicilio[]) => {
                 //console.log("Lista de clientes", data);
                 for (let i = 0; i < data.length; i++) {
-                    if (data[i].cliente_domicilio != null) {
+                    if (data[i].cliente != null) {
                         this.clientesDomicilio[i] = data[i];
                     }
                 }
@@ -55,7 +55,7 @@ export class ClientesComponent implements OnInit, OnDestroy {
 
     borrar(domicilio: Domicilio) {
         console.log(domicilio);
-        this.clienteService.delete(domicilio.cliente_domicilio)
+        this.clienteService.delete(domicilio.cliente)
             .subscribe(() => {
                 this.domicilioService.delete(domicilio)
                     .subscribe(res => {

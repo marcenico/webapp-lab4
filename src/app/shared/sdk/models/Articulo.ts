@@ -16,7 +16,7 @@ export interface ArticuloInterface {
   "updatedAt"?: Date;
   "rubroId": number;
   pedidoventadetalles?: Pedidoventadetalle[];
-  articulo_rubro?: Rubro;
+  rubro?: Rubro;
 }
 
 export class Articulo implements ArticuloInterface {
@@ -30,7 +30,7 @@ export class Articulo implements ArticuloInterface {
   "updatedAt": Date;
   "rubroId": number;
   pedidoventadetalles: Pedidoventadetalle[];
-  articulo_rubro: Rubro;
+  rubro: Rubro;
   constructor(data?: ArticuloInterface) {
     Object.assign(this, data);
   }
@@ -110,8 +110,8 @@ export class Articulo implements ArticuloInterface {
                   keyFrom: 'id',
           keyTo: 'articuloId'
         },
-        articulo_rubro: {
-          name: 'articulo_rubro',
+        rubro: {
+          name: 'rubro',
           type: 'Rubro',
           model: 'Rubro',
           relationType: 'belongsTo',

@@ -44,19 +44,19 @@ export class DetallePedidoComponent implements OnInit {
 
 
 
-          this.pedido.pedido_venta_domicilio = new Pedidoventa();
-          this.pedido.pedido_venta_domicilio.subTotal = 0.0;
-          this.pedido.pedido_venta_domicilio.montoTotal = 0.0;
-          this.pedido.pedido_venta_domicilio.gastosEnvio = 0.0;
+          this.pedido.pedido_venta = new Pedidoventa();
+          this.pedido.pedido_venta.subTotal = 0.0;
+          this.pedido.pedido_venta.montoTotal = 0.0;
+          this.pedido.pedido_venta.gastosEnvio = 0.0;
           this.validarFormulario();
         } else {
           this.accion = " Actualizando Pedido";
-          this.pedido.pedido_venta_domicilio = new Pedidoventa();
+          this.pedido.pedido_venta = new Pedidoventa();
           this.validarFormulario();
           this.domService.getOne(this.id)
             .subscribe(data => {
               this.pedido = data;
-              this.pedido.pedido_venta_domicilio = data.pedido_venta_domicilio;
+              this.pedido.pedido_venta = data.pedido_venta;
             });
         }
       });
@@ -136,7 +136,7 @@ export class DetallePedidoComponent implements OnInit {
 
   selectChange() {
     // console.log(this.estado);
-    this.pedido.pedido_venta_domicilio.estado = this.estado;
+    this.pedido.pedido_venta.estado = this.estado;
     if (this.estado == "Entregado") {
       this.forma.get('entregado').setValue(true);
     } else {

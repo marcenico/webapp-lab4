@@ -25,17 +25,17 @@ export class ClienteComponent implements OnInit {
         this.id = parametros['id'];
         if (this.id === "new") {
           this.accion = " Nuevo Cliente";
-          this.domicilio.cliente_domicilio = new Cliente();
-          this.domicilio.cliente_domicilio.saldo = 0;
+          this.domicilio.cliente = new Cliente();
+          this.domicilio.cliente.saldo = 0;
           this.validarFormulario();
         } else {
           this.accion = " Actualizando Cliente";
-          this.domicilio.cliente_domicilio = new Cliente();
+          this.domicilio.cliente = new Cliente();
           this.validarFormulario();
           this.domService.getOne(this.id)
             .subscribe(data => {
               this.domicilio = data;
-              this.domicilio.cliente_domicilio = data.cliente_domicilio;
+              this.domicilio.cliente = data.cliente;
             });
         }
       });
@@ -66,7 +66,7 @@ export class ClienteComponent implements OnInit {
       this.clienteService.create(this.domicilio)
         .subscribe((dom: Domicilio) => {
           console.log("Domicilio creado");
-          this.domService.createClienteWithDomicilio(dom.id, this.domicilio.cliente_domicilio)
+          this.domService.createClienteWithDomicilio(dom.id, this.domicilio.cliente)
             .subscribe(res => {
               console.log("Domicilio con cliente asociado", res);
               this.router.navigate(['/clientes'], { replaceUrl: true });
