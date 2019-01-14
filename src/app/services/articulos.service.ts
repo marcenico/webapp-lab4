@@ -14,7 +14,7 @@ export class ArticulosService {
   }
 
   getOne(id: number): Observable<Articulo> {
-    let filter: any = { where: { id: id } };
+    let filter: any = { where: { id: id }, include: 'rubro' };
     return this.articuloApi.findOne(filter);
   }
 

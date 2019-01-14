@@ -9,6 +9,7 @@ import { PedidoVentaComponent } from './components/pedido-venta/pedido-venta.com
 import { DetallePedidoComponent } from './components/pedido-venta/detalle-pedido/detalle-pedido.component';
 import { RubrosComponent } from './components/rubros/rubros.component';
 import { RubroComponent } from './components/rubros/rubro/rubro.component';
+import { ArticuloComponent } from './components/articulos/articulo/articulo.component';
 
 const app_routes: Routes = [
   { path: 'auth', component: AuthComponent },
@@ -16,6 +17,7 @@ const app_routes: Routes = [
   { path: 'clientes', component: ClientesComponent },
   { path: 'clientes/cliente/:id', component: ClienteComponent },
   { path: 'articulos', component: ArticulosComponent },
+  { path: 'articulos/articulo/:id', component: ArticuloComponent },
   { path: 'rubros', component: RubrosComponent },
   { path: 'rubros/rubro/:id', component: RubroComponent },
   { path: 'pedidos', component: PedidoVentaComponent },
