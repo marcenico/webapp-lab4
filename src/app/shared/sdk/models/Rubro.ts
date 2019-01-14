@@ -8,7 +8,7 @@ export interface RubroInterface {
   "createdAt"?: Date;
   "updatedAt"?: Date;
   "rubroPadreId"?: number;
-  rubroPadreAHijo?: Rubro[];
+  rubroPadre?: Rubro;
 }
 
 export class Rubro implements RubroInterface {
@@ -18,7 +18,7 @@ export class Rubro implements RubroInterface {
   "createdAt": Date;
   "updatedAt": Date;
   "rubroPadreId": number;
-  rubroPadreAHijo: Rubro[];
+  rubroPadre: Rubro;
   constructor(data?: RubroInterface) {
     Object.assign(this, data);
   }
@@ -78,13 +78,13 @@ export class Rubro implements RubroInterface {
         },
       },
       relations: {
-        rubroPadreAHijo: {
-          name: 'rubroPadreAHijo',
-          type: 'Rubro[]',
+        rubroPadre: {
+          name: 'rubroPadre',
+          type: 'Rubro',
           model: 'Rubro',
-          relationType: 'hasMany',
-                  keyFrom: 'id',
-          keyTo: 'rubroPadreId'
+          relationType: 'belongsTo',
+                  keyFrom: 'rubroPadreId',
+          keyTo: 'id'
         },
       }
     }

@@ -7,6 +7,8 @@ import { ClienteComponent } from './components/clientes/cliente/cliente.componen
 import { ArticulosComponent } from './components/articulos/articulos.component';
 import { PedidoVentaComponent } from './components/pedido-venta/pedido-venta.component';
 import { DetallePedidoComponent } from './components/pedido-venta/detalle-pedido/detalle-pedido.component';
+import { RubrosComponent } from './components/rubros/rubros.component';
+import { RubroComponent } from './components/rubros/rubro/rubro.component';
 
 const app_routes: Routes = [
   { path: 'auth', component: AuthComponent },
@@ -14,6 +16,8 @@ const app_routes: Routes = [
   { path: 'clientes', component: ClientesComponent },
   { path: 'clientes/cliente/:id', component: ClienteComponent },
   { path: 'articulos', component: ArticulosComponent },
+  { path: 'rubros', component: RubrosComponent },
+  { path: 'rubros/rubro/:id', component: RubroComponent },
   { path: 'pedidos', component: PedidoVentaComponent },
   { path: 'pedidos/pedido/:id', component: DetallePedidoComponent },
   { path: '**', redirectTo: 'auth', pathMatch: 'full' }
