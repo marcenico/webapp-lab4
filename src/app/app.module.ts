@@ -29,6 +29,7 @@ import { UsuariosApi, LoopBackAuth, ClienteApi, DomicilioApi, PedidoventaApi, Ru
 import { SDKModels } from './shared/sdk/services/custom/SDKModels';
 import { InternalStorage } from './shared/sdk/storage/storage.swaps';
 import { RubroComponent } from './components/rubros/rubro/rubro.component';
+import { ArticuloComponent } from './components/articulos/articulo/articulo.component';
 //#endregion
 
 @NgModule({
@@ -46,6 +47,7 @@ import { RubroComponent } from './components/rubros/rubro/rubro.component';
     DetallePedidoComponent,
     RubrosComponent,
     RubroComponent,
+    ArticuloComponent,
   ],
   imports: [
     BrowserModule,
