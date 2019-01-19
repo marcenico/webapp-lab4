@@ -8,7 +8,7 @@ import { DomicilioService } from './domicilio.service';
   providedIn: 'root'
 })
 
-export class PedidoVentaService {
+export class PedidosService {
   constructor(private pedidoventaApi: PedidoventaApi, private domService: DomicilioService) { }
 
   getAll(filtro: LoopBackFilter = {}): Observable<Pedidoventa[]> {

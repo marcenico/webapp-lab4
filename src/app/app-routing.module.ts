@@ -5,8 +5,8 @@ import { HomeComponent } from './components/home/home.component';
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { ClienteComponent } from './components/clientes/cliente/cliente.component';
 import { ArticulosComponent } from './components/articulos/articulos.component';
-import { PedidoVentaComponent } from './components/pedido-venta/pedido-venta.component';
-import { DetallePedidoComponent } from './components/pedido-venta/detalle-pedido/detalle-pedido.component';
+import { PedidosComponent } from './components/pedidos/pedidos.component';
+import { DetallePedidoComponent } from './components/pedidos/detalle-pedido/detalle-pedido.component';
 import { RubrosComponent } from './components/rubros/rubros.component';
 import { RubroComponent } from './components/rubros/rubro/rubro.component';
 import { ArticuloComponent } from './components/articulos/articulo/articulo.component';
@@ -20,7 +20,7 @@ const app_routes: Routes = [
   { path: 'articulos/articulo/:id', component: ArticuloComponent },
   { path: 'rubros', component: RubrosComponent },
   { path: 'rubros/rubro/:id', component: RubroComponent },
-  { path: 'pedidos', component: PedidoVentaComponent },
+  { path: 'pedidos', component: PedidosComponent },
   { path: 'pedidos/pedido/:id', component: DetallePedidoComponent },
   { path: '**', redirectTo: 'auth', pathMatch: 'full' }
 ]

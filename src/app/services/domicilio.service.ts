@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DomicilioApi, Domicilio, Cliente } from '../shared/sdk';
+import { DomicilioApi, Domicilio, Cliente, Pedidoventa } from '../shared/sdk';
 import { Observable } from 'rxjs';
 import { LoopBackFilter } from '../../../../webapp/src/app/shared/sdk';
 
@@ -16,7 +16,7 @@ export class DomicilioService {
 
   getOne(id: string): Observable<Domicilio> {
     let idNumber = parseInt(id);
-    let filter: any = { where: {id: idNumber}, include: 'cliente'};
+    let filter: any = { where: { id: idNumber }, include: 'cliente' };
     return this.domicilioApi.findOne(filter);
   }
 
@@ -34,6 +34,10 @@ export class DomicilioService {
 
   updateClienteWithDomicilio(id: number, data: Domicilio): Observable<Domicilio> {
     return this.domicilioApi.updateCliente(id, data.cliente);
+  }
+
+  createPedidoWithDomicilio(id: number, pedido_venta: Pedidoventa): any {
+    return this.domicilioApi.createPedido_venta(id, pedido_venta);
   }
 
   update(data: Domicilio): Observable<Domicilio> {

@@ -13,3 +13,7 @@ table th, table td {
     bottom: 0;
     width: 100%;
 }
+
+.btn-rounded {
+  border-radius: 50%;
+}

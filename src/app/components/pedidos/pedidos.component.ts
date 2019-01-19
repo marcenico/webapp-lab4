@@ -3,13 +3,13 @@ import { Subject } from 'rxjs';
 import { DomicilioService } from '../../services/domicilio.service';
 import { Domicilio, Pedidoventa } from '../../shared/sdk';
 import { Router } from '@angular/router';
-import { PedidoVentaService } from 'src/app/services/pedido-venta.service';
+import { PedidosService } from 'src/app/services/pedidos.service';
 
 @Component({
-    selector: 'app-pedido-venta',
-    templateUrl: './pedido-venta.component.html',
+    selector: 'app-pedidos',
+    templateUrl: './pedidos.component.html',
 })
-export class PedidoVentaComponent implements OnInit {
+export class PedidosComponent implements OnInit {
 
     pedidosDomicilio: Domicilio[] = [];
     dtOptions: DataTables.Settings = {};
@@ -17,7 +17,7 @@ export class PedidoVentaComponent implements OnInit {
     dataTable: any;
 
     constructor(
-        private pedidoVentaService: PedidoVentaService, private domicilioService: DomicilioService,
+        private PedidosService: PedidosService, private domicilioService: DomicilioService,
         private chRef: ChangeDetectorRef,
         private route: Router
     ) { }
@@ -55,7 +55,7 @@ export class PedidoVentaComponent implements OnInit {
 
     borrar(domicilio: Domicilio) {
         console.log(domicilio);
-        this.pedidoVentaService.delete(domicilio.pedido_venta)
+        this.PedidosService.delete(domicilio.pedido_venta)
             .subscribe(() => {
                 this.domicilioService.delete(domicilio)
                     .subscribe(res => {

@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Domicilio, Pedidoventa, Pedidoventadetalle } from 'src/app/shared/sdk';
-import { PedidoVentaService } from 'src/app/services/pedido-venta.service';
+import { PedidosService } from 'src/app/services/pedidos.service';
 import { DomicilioService } from 'src/app/services/domicilio.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatesExtension } from 'src/app/wrappers/DatesExtension';
 import { StringsRegex } from 'src/app/wrappers/StringsRegex';
 
 @Component({
-  selector: 'app-detalle-pedido',
-  templateUrl: './detalle-pedido.component.html',
+  selector: 'app-pedido',
+  templateUrl: './pedido.component.html',
 })
-export class DetallePedidoComponent implements OnInit {
+export class PedidoComponent implements OnInit {
 
   forma: FormGroup;
   id: string;
@@ -33,36 +33,15 @@ export class DetallePedidoComponent implements OnInit {
 
 
   private pedido: Domicilio = new Domicilio();
-  private detallePedido: Pedidoventadetalle = new Pedidoventadetalle();
-
-  constructor(private pedidoVentaService: PedidoVentaService, private domService: DomicilioService, private router: Router, private route: ActivatedRoute) {
-    this.route.params
-      .subscribe(parametros => {
-        this.id = parametros['id'];
-        if (this.id === "new") {
-          this.accion = " Nuevo Pedido";
 
 
+  @Input() detalles: Array<Pedidoventadetalle> = [];
 
-          this.pedido.pedido_venta = new Pedidoventa();
-          this.pedido.pedido_venta.subTotal = 0.0;
-          this.pedido.pedido_venta.montoTotal = 0.0;
-          this.pedido.pedido_venta.gastosEnvio = 0.0;
-          this.validarFormulario();
-        } else {
-          this.accion = " Actualizando Pedido";
-          this.pedido.pedido_venta = new Pedidoventa();
-          this.validarFormulario();
-          this.domService.getOne(this.id)
-            .subscribe(data => {
-              this.pedido = data;
-              this.pedido.pedido_venta = data.pedido_venta;
-            });
-        }
-      });
+  constructor(private pedidosService: PedidosService, private domService: DomicilioService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.armarPedido();
   }
 
   private validarFormulario() {
@@ -81,20 +60,52 @@ export class DetallePedidoComponent implements OnInit {
     })
   }
 
+  armarPedido() {
+    this.route.params
+      .subscribe(parametros => {
+        this.id = parametros['id'];
+        this.pedido.pedido_venta = new Pedidoventa();
+        this.validarFormulario();
+
+        if (this.id === "new") {
+          this.accion = " Nuevo Pedido";
+          this.calcularSubTotal();
+          this.pedido.pedido_venta.montoTotal = 0.0;
+          this.pedido.pedido_venta.gastosEnvio = 0.0;
+        } else {
+          // this.accion = " Actualizando Pedido";
+          // this.domService.getOne(this.id)
+          //   .subscribe(data => {
+          //     this.pedido = data;
+          //     this.pedido.pedido_venta = data.pedido_venta;
+          //   });
+        }
+      });
+  }
+
+  calcularSubTotal() {
+    let auxSubTotal = 0;
+    console.log(this.detalles);
+    for (let i = 0; i < this.detalles.length; i++) {
+      auxSubTotal += this.detalles[i].subTotal;
+    }
+    this.pedido.pedido_venta.subTotal = auxSubTotal;
+  }
+
   public guardar() {
     // INSERTANDO
     if (this.id === "new") {
-      //   console.log(this.domicilio);
-      //   this.pedidoVentaService.create(this.domicilio)
-      //     .subscribe((dom: Domicilio) => {
-      //       console.log("Domicilio creado");
-      //       this.domService.createClienteWithDomicilio(dom.id, this.domicilio.cliente_domicilio)
-      //         .subscribe(res => {
-      //           console.log("Domicilio con cliente asociado", res);
-      //           this.router.navigate(['/clientes'], { replaceUrl: true });
-      //         });
+      this.pedido.pedido_venta.pedido_venta_detalle = this.detalles;
+      this.pedidosService.create(this.pedido)
+        .subscribe((dom: Domicilio) => {
+          console.log("Domicilio creado");
+          this.domService.createPedidoWithDomicilio(dom.id, this.pedido.pedido_venta)
+            .subscribe(res => {
+              console.log("Domicilio con pedido asociado", res);
+              this.router.navigate(['/pedido'], { replaceUrl: true });
+            });
 
-      //     });;
+        });;
     } else {
       // ACTUALIZANDO
       console.log("PARA ACTUALIZAR", this.pedido);
@@ -116,7 +127,6 @@ export class DetallePedidoComponent implements OnInit {
       this.isBigger = (number === -1);
     }
   }
-
 
   seeCalendar(v: boolean) {
     this.showCalendar = v;
@@ -147,7 +157,5 @@ export class DetallePedidoComponent implements OnInit {
   get estado(): string {
     return this.forma ? this.forma.get('estado').value : '';
   }
-
-
 
 }

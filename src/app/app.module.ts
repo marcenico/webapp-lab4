@@ -19,17 +19,18 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ClienteComponent } from './components/clientes/cliente/cliente.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
-import { PedidoVentaComponent } from './components/pedido-venta/pedido-venta.component';
-import { DetallePedidoComponent } from './components/pedido-venta/detalle-pedido/detalle-pedido.component';
+import { PedidosComponent } from './components/pedidos/pedidos.component';
+import { DetallePedidoComponent } from './components/pedidos/detalle-pedido/detalle-pedido.component';
 import { RubrosComponent } from './components/rubros/rubros.component';
 //#endregion
 
 //#region AGREGADAS PARA QUE FUNCIONE EL SDK*/
-import { UsuariosApi, LoopBackAuth, ClienteApi, DomicilioApi, PedidoventaApi, RubroApi, ArticuloApi } from './shared/sdk';
+import { UsuariosApi, LoopBackAuth, ClienteApi, DomicilioApi, PedidoventaApi, RubroApi, ArticuloApi, PedidoventadetalleApi } from './shared/sdk';
 import { SDKModels } from './shared/sdk/services/custom/SDKModels';
 import { InternalStorage } from './shared/sdk/storage/storage.swaps';
 import { RubroComponent } from './components/rubros/rubro/rubro.component';
 import { ArticuloComponent } from './components/articulos/articulo/articulo.component';
+import { PedidoComponent } from './components/pedidos/pedido/pedido.component';
 //#endregion
 
 @NgModule({
@@ -43,11 +44,12 @@ import { ArticuloComponent } from './components/articulos/articulo/articulo.comp
     ClienteComponent,
     FooterComponent,
     SidebarComponent,
-    PedidoVentaComponent,
+    PedidosComponent,
     DetallePedidoComponent,
     RubrosComponent,
     RubroComponent,
     ArticuloComponent,
+    PedidoComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,7 @@ import { ArticuloComponent } from './components/articulos/articulo/articulo.comp
     ReactiveFormsModule,
     ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
   ],
-  providers: [DomicilioApi, UsuariosApi, ClienteApi, PedidoventaApi, RubroApi, ArticuloApi, HttpClientModule, SDKModels, InternalStorage, LoopBackAuth],
+  providers: [DomicilioApi, UsuariosApi, ClienteApi, PedidoventaApi, RubroApi, ArticuloApi, PedidoventadetalleApi, HttpClientModule, SDKModels, InternalStorage, LoopBackAuth],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

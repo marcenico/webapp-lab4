@@ -1,0 +1,166 @@
+<!-- NAVBAR -->
+<app-navbar></app-navbar>
+
+<div class="container">
+  <br>
+  <div class="row">
+    <div class="col">
+      <button [routerLink]="['/pedidos']" routerLinkActive="router-link-active" class="close" type="button">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+  </div>
+
+  <br>
+  <div class="row justify-content-around">
+
+    <div class="col-lg-10 shadow">
+      <br>
+      <div class="d-flex flex-row">
+        <div class="p-2">
+          <h5 class="btn"><i class="fas fa-home"></i> Detalle de nuevo pedido</h5>
+        </div>
+        <div class="p-2">
+          <button type="button" (click)="seeForm(true);" class="btn btn-outline-warning"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+
+      <!-- FORMULARIO -->
+      <form *ngIf="showForm" [formGroup]="dForma" (ngSubmit)="addDetalle()">
+
+        <div class="form-row">
+          <!-- Cantidad -->
+          <div class="form-group col-3">
+            <label for="cantidad">Cantidad</label>
+            <input type="number" class="form-control text-center" id="cantidad" placeholder="0" formControlName="cantidad"
+              [(ngModel)]="detalle.cantidad" (keyup)="calculateSubtotal()" (click)="calculateSubtotal()">
+
+            <div class="alert alert-warning" *ngIf="dForma.get('cantidad').errors?.required && dForma.get('cantidad').dirty">
+              * Este campo es requerido
+            </div>
+
+            <div class="alert alert-warning" *ngIf="dForma.get('cantidad').errors?.pattern">
+              * Numeros mayores a 0
+            </div>
+          </div>
+
+          <!-- Descuento -->
+          <div class="form-group col-2">
+            <label for="descuento">Descuento</label>
+            <input type="number" class="form-control text-center" id="descuento" formControlName="descuento"
+              [(ngModel)]="detalle.porcentajeDescuento" (keyup)="calculateSubtotal()" (click)="calculateSubtotal()">
+
+            <div class="alert alert-warning" *ngIf="dForma.get('descuento').errors?.required && dForma.get('descuento').dirty">
+              * Este campo es requerido
+            </div>
+
+            <div class="alert alert-warning" *ngIf="dForma.get('descuento').errors?.pattern">
+              * Entre 0 - 100
+            </div>
+
+          </div>
+
+          <!-- Articulo -->
+          <div class="form-group col">
+            <label for="articulo">Articulo</label>
+            <select class="custom-select" id="articulo" formControlName="articulo" (change)="selectChange()">
+              <option *ngFor="let articulo of articulos" [ngValue]="articulo.denominacion">{{articulo.denominacion}}</option>
+            </select>
+          </div>
+
+          <!-- Subtotal -->
+          <div class="form-group col-2">
+            <label for="subTotal">Subtotal</label>
+            <fieldset disabled>
+              <input type="text" class="form-control text-right" id="subTotal" formControlName="subTotal" [(ngModel)]="detalle.subTotal">
+            </fieldset>
+
+            <div class="alert alert-warning" *ngIf="dForma.get('subTotal').errors?.required && dForma.get('subTotal').dirty">
+              * Este campo es requerido
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row justify-content-end">
+          <div class="col-2">
+            <button (click)="cancel()" class="btn btn-sm btn-outline-secondary" type="button">Cancelar</button>
+          </div>
+          <div class="col-2">
+            <button [disabled]="!dForma.valid" class="btn btn-sm btn-outline-primary" type="submit">Guardar</button>
+          </div>
+        </div>
+
+        <br>
+        <hr class="my-2">
+        <br>
+      </form>
+
+      <!-- PARA GENERAR PEDIDO -->
+      <div class="row" *ngIf="detalles.length > 0">
+        <div class="col">
+          <button (click)="generatePedido()" class="btn btn-sm btn-primary" type="button" data-toggle="modal"
+            data-target="#modal">Generar Pedido</button>
+        </div>
+      </div>
+
+      <br>
+
+      <!-- TABLA DE DETALLES -->
+      <div class="row">
+        <div class="col">
+          <div class="table-responsive">
+            <table id="example" class="table table-sm " datatable="" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Sub Total</th>
+                  <th scope="col">Descuento</th>
+                  <th scope="col">Articulo</th>
+                  <th scope="col">Editar</th>
+                  <th scope="col">Eliminar</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="detalles.length > 0">
+                <tr *ngFor="let d of detalles; let i = index">
+                  <th scope="col">{{i+1}}</th>
+                  <td>{{d.cantidad}}</td>
+                  <td>{{d.subTotal}}</td>
+                  <td>{{d.porcentajeDescuento}}</td>
+                  <td>{{d.articulo.denominacion}}</td>
+                  <td><button type="button" class="btn btn-sm btn-info" (click)="editRow(d)">
+                      <span class="fas fa-edit"></span>
+                    </button></td>
+                  <td><button type="button" class="btn btn-sm btn-danger" (click)="deleteRow(d)">
+                      <span class="fas fa-trash-alt"></span>
+                    </button></td>
+                </tr>
+              </tbody>
+            </table>
+            <br>
+          </div>
+        </div>
+      </div>
+
+      
+      <!-- NUEVO PEDIDO -->
+      <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+
+            <div *ngIf="tieneDetalle" class="col shadow">
+              <app-pedido [detalles]="detalles" #pedido></app-pedido>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <br><br><br>
+</div>
+
+<!-- FOOTER -->
+<app-footer></app-footer>
