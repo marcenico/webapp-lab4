@@ -18,7 +18,7 @@
       <br>
       <div class="d-flex flex-row">
         <div class="p-2">
-          <h5 class="btn"><i class="fas fa-home"></i> Detalle de nuevo pedido</h5>
+          <h5 class="btn"><i class="fas fa-home"></i> Detalle de pedido</h5>
         </div>
         <div class="p-2">
           <button type="button" (click)="seeForm(true);" class="btn btn-outline-warning"><i class="fas fa-plus"></i></button>
@@ -99,8 +99,8 @@
       <!-- PARA GENERAR PEDIDO -->
       <div class="row" *ngIf="detalles.length > 0">
         <div class="col">
-          <button (click)="generatePedido()" class="btn btn-sm btn-primary" type="button" data-toggle="modal"
-            data-target="#modal">Generar Pedido</button>
+          <button (click)="generatePedido()" class="btn btn-primary" type="button" data-toggle="modal"
+            data-target="#modal">{{action}}</button>
         </div>
       </div>
 

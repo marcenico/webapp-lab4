@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Subject } from 'rxjs';
 import { DomicilioService } from '../../services/domicilio.service';
-import { Domicilio, Pedidoventa } from '../../shared/sdk';
+import { Domicilio, Pedidoventa, Cliente } from '../../shared/sdk';
 import { Router } from '@angular/router';
 import { PedidosService } from 'src/app/services/pedidos.service';
+import { ClienteService } from 'src/app/services/clientes.service';
 
 @Component({
     selector: 'app-pedidos',
@@ -11,13 +12,14 @@ import { PedidosService } from 'src/app/services/pedidos.service';
 })
 export class PedidosComponent implements OnInit {
 
-    pedidosDomicilio: Domicilio[] = [];
+    pedidos: Pedidoventa[] = [];
     dtOptions: DataTables.Settings = {};
     dtTrigger: Subject<any> = new Subject();
     dataTable: any;
 
     constructor(
-        private PedidosService: PedidosService, private domicilioService: DomicilioService,
+        private pedidosService: PedidosService,
+        private clientesService: ClienteService,
         private chRef: ChangeDetectorRef,
         private route: Router
     ) { }
@@ -36,13 +38,11 @@ export class PedidosComponent implements OnInit {
             processing: true,
         };
         this.dtOptions.language = Lang.lang;
-        this.domicilioService.getAll({ include: 'pedido_venta' })
-            .subscribe((data: Domicilio[]) => {
-                //console.log("Lista de clientes", data);
-                for (let i = 0; i < data.length; i++) {
-                    if (data[i].pedido_venta != null) {
-                        this.pedidosDomicilio[i] = data[i];
-                    }
+        this.pedidosService.getAll()
+            .subscribe((data: Pedidoventa[]) => {
+                //console.log("Lista de clientes", data);         
+                if (data != null) {
+                    this.pedidos = data;
                 }
 
                 this.chRef.detectChanges();
@@ -53,26 +53,33 @@ export class PedidosComponent implements OnInit {
             });
     }
 
-    borrar(domicilio: Domicilio) {
-        console.log(domicilio);
-        this.PedidosService.delete(domicilio.pedido_venta)
-            .subscribe(() => {
-                this.domicilioService.delete(domicilio)
-                    .subscribe(res => {
-                        //this.ArmarTabla();
-                        console.log(res);
-                        this.deleteRow(domicilio.id);
-
-                    }, error => console.error(error));
-            }, error => console.error(error));
+    borrar(pedido: Pedidoventa) {
+        console.log(pedido);
+        this.clientesService.getById(pedido.clienteId)
+            .subscribe(data => {
+                this.calcularSaldo(data, pedido);
+                this.clientesService.update(data, data.id.toString())
+                    .subscribe(() => {
+                        this.pedidosService.delete(pedido)
+                            .subscribe(res => {
+                                // console.log(res);
+                                this.deleteRow(pedido.id);
+                            }, error => console.error(error));
+                    });
+            });
     }
 
     deleteRow(id: number) {
-        for (let i = 0; i < this.pedidosDomicilio.length; ++i) {
-            if (this.pedidosDomicilio[i].id === id) {
-                this.pedidosDomicilio.splice(i, 1);
+        for (let i = 0; i < this.pedidos.length; ++i) {
+            if (this.pedidos[i].id === id) {
+                this.pedidos.splice(i, 1);
             }
         }
+    }
+
+    calcularSaldo(cliente: Cliente, pedido: Pedidoventa) {
+        cliente.saldo += pedido.montoTotal;
+        if (cliente.saldo > 0) cliente.saldo = 0;
     }
 
 }

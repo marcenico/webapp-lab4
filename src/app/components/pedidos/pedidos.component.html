@@ -14,7 +14,7 @@
           <h4><i class="fas fa-table"></i> Registro de pedidos</h4>
           <button [routerLink]="['/pedidos/pedido/new']" routerLinkActive="router-link-active" class="btn btn-sm btn-warning text-white"
             style="float: right;"><i class="fas fa-plus-circle"></i>Agregar Pedido</button>
-            <br><br>
+          <br><br>
           <div class="table-responsive">
             <table id="example" class="table table-sm " datatable="" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
               <thead class="thead-light">
@@ -33,16 +33,18 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let pedido of pedidosDomicilio; let i = index" [attr.id]="pedido.id">
+                <tr *ngFor="let pedido of pedidos; let i = index" [attr.id]="pedido.id">
                   <th scope="col">{{i+1}}</th>
-                  <td>{{pedido.pedido-venta.nroDePedido}}</td>
-                  <td>{{pedido.pedido-venta.fechaDePedido}}</td>
-                  <td>{{pedido.pedido-venta.fechaDeEntrega}}</td>
-                  <td>{{pedido.pedido-venta.gastosDeEnvio}}</td>
-                  <td>{{pedido.pedido-venta.estado}}</td>
-                  <td><input class="form-check-input" type="checkbox" value="pedido.pedido-venta.entregado"></td>
-                  <td>{{pedido.pedido-venta.subTotal}}</td>
-                  <td>{{pedido.pedido-venta.montoTotal}}</td>
+                  <td>{{pedido.nroPedido}}</td>
+                  <td>{{pedido.fechaPedido | date:'short'}}</td>
+                  <td>{{pedido.fechaEstimadaEntrega | date:'short'}}</td>
+                  <td>{{pedido.gastosEnvio}}</td>
+                  <td>{{pedido.estado}}</td>
+                  <td>
+                    <fieldset disabled><input class="form-check-input" type="checkbox" value="pedido.entregado"></fieldset>
+                  </td>
+                  <td>{{pedido.subTotal}}</td>
+                  <td>{{pedido.montoTotal}}</td>
 
                   <td><button [routerLink]="['/pedidos/pedido', pedido.id]" routerLinkActive="router-link-active" type="button"
                       class="btn btn-sm btn-info">
@@ -60,7 +62,7 @@
       <br><br><br>
 
     </div>
-  </div>  
+  </div>
 </div>
 
 <!-- FOOTER -->

@@ -28,6 +28,7 @@ export class DetallePedidoComponent implements OnInit {
     dataTable: any;
 
     detalles: Array<Pedidoventadetalle> = [];
+    action: string;
     private articulos: Articulo[] = [];
     private detalle: Pedidoventadetalle;
     private aux: Pedidoventadetalle = new Pedidoventadetalle();
@@ -51,8 +52,15 @@ export class DetallePedidoComponent implements OnInit {
                     this.setDefaultForm();
                     this.armarTabla();
                     this.validarFormulario();
+                    this.action = "Generar Pedido";
                 } else {
-                    this.armarTabla();
+                    this.action = "Actualizar Pedido";
+                    this.detalleService.getAllById(parseInt(this.id))
+                        .subscribe(data => {
+                            console.log(data);
+                            this.detalles = data;
+                            this.armarTabla();
+                        });
                     this.validarFormulario();
                 }
             });
@@ -120,6 +128,16 @@ export class DetallePedidoComponent implements OnInit {
         this.updateId = '';
     }
 
+    setFormValues(data: Pedidoventadetalle) {
+        console.log(data);
+        this.updateId = data.id.toString();
+        this.dForma.get('cantidad').setValue(data.cantidad);
+        this.dForma.get('descuento').setValue(data.porcentajeDescuento);
+        this.dForma.get('subTotal').setValue(data.subTotal);
+        this.setSelectedArticulo(data.articulo);
+        this.detalle = data;
+    }
+
     calculateSubtotal() {
         // console.log(this.getArticulo);
         if (this.getArticulo == null) return;
@@ -164,8 +182,7 @@ export class DetallePedidoComponent implements OnInit {
     editRow(refDetalle: Pedidoventadetalle) {
         this.seeForm(true);
         this.aux = refDetalle;
-        this.updateId = this.aux.id.toString();
-        this.setSelectedArticulo(this.aux.articulo);
+        this.setFormValues(this.aux);
     }
 
     cancel() {
@@ -180,6 +197,9 @@ export class DetallePedidoComponent implements OnInit {
         }
     }
 
+    volver() {
+        this.router.navigate(['/pedidos'], { replaceUrl: true });
+    }
 }
 
 class Lang {
