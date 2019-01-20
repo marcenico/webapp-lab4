@@ -144,7 +144,7 @@ export class PedidoComponent implements OnInit {
         .subscribe(data => {
           console.log("ACTUALIZADO");
 
-          this.pedidosService.getAll()
+          this.pedidosService.getAll({ where: { clienteId: this.getCliente.id } })
             .subscribe(allPedidos => {
               console.log(allPedidos)
               this.calcularSaldo(allPedidos);
@@ -164,14 +164,13 @@ export class PedidoComponent implements OnInit {
   }
 
   calcularSaldo(allPedidos: Pedidoventa[]) {
-    let pedidosCliente = allPedidos.filter(x => x.clienteId == this.getCliente.id);
-    this.getCliente.saldo = 0;
-    for (let i = 0; i < pedidosCliente.length; i++) {
-      if (pedidosCliente[i].estado == "Pendiente" || pedidosCliente[i].estado == "Enviado") {
-        this.getCliente.saldo += pedidosCliente[i].montoTotal;
-        this.getCliente.saldo = this.getCliente.saldo * -1;
+    let total = 0
+    for (let i = 0; i < allPedidos.length; i++) {
+      if (allPedidos[i].estado == "Pendiente" || allPedidos[i].estado == "Enviado") {
+        total = total + allPedidos[i].montoTotal;
       }
     }
+    this.getCliente.saldo = total * -1;
   }
 
   onCustomFechaPedido(event) {
