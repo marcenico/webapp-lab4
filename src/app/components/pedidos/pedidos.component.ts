@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Subject } from 'rxjs';
-import { DomicilioService } from '../../services/domicilio.service';
-import { Domicilio, Pedidoventa, Cliente } from '../../shared/sdk';
+import { Pedidoventa, Cliente } from '../../shared/sdk';
 import { Router } from '@angular/router';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { ClienteService } from 'src/app/services/clientes.service';

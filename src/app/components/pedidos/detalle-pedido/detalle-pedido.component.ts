@@ -1,14 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef, Output, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { Pedidoventadetalle, Articulo, Pedidoventa } from 'src/app/shared/sdk';
+import { Pedidoventadetalle, Articulo } from 'src/app/shared/sdk';
 import { PedidosDetalleService } from 'src/app/services/pedidos-detalle.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { StringsRegex } from 'src/app/wrappers/StringsRegex';
 import { ArticulosService } from 'src/app/services/articulos.service';
-import { TouchSequence, EventEmitter } from 'selenium-webdriver';
-import { ThrowStmt } from '@angular/compiler';
-import { PedidosComponent } from '../pedidos.component';
 import { PedidoComponent } from '../pedido/pedido.component';
 
 @Component({
