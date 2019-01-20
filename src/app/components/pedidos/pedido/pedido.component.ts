@@ -84,7 +84,7 @@ export class PedidoComponent implements OnInit {
           this.accion = " Actualizando Pedido";
           this.pedidosService.getById(parseInt(this.id))
             .subscribe(data => {
-              console.log(data);
+              // console.log(data);
               this.forma.get('fechaPedido').setErrors(null);
               this.forma.get('fechaEstimadaEntrega').setErrors(null);
               this.pedido = data;
@@ -105,7 +105,7 @@ export class PedidoComponent implements OnInit {
 
   calcularSubTotalYMontoTotal() {
     let auxSubTotal = 0;
-    console.log(this.detalles);
+    // console.log(this.detalles);
     for (let i = 0; i < this.detalles.length; i++) {
       auxSubTotal += this.detalles[i].subTotal;
     }

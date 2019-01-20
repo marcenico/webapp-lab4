@@ -17,3 +17,7 @@ table th, table td {
 .btn-rounded {
   border-radius: 50%;
 }
+
+* {
+    font-size: 14px;
+}

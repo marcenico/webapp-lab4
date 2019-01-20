@@ -54,7 +54,7 @@ export class DetallePedidoComponent implements OnInit {
                     this.action = "Actualizar Pedido";
                     this.detalleService.getAllById(parseInt(this.id))
                         .subscribe(data => {
-                            console.log(data);
+                            // console.log(data);
                             this.detalles = data;
                             this.armarTabla();
                         });

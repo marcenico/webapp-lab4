@@ -15,6 +15,7 @@ export class PedidosComponent implements OnInit {
     dtOptions: DataTables.Settings = {};
     dtTrigger: Subject<any> = new Subject();
     dataTable: any;
+    entregado: boolean;
 
     constructor(
         private pedidosService: PedidosService,

@@ -8,7 +8,7 @@
     <!-- SIDEBAR -->
     <app-sidebar></app-sidebar>
 
-    <div class="col">
+    <div class="col-lg-12">
       <div class="card shadow">
         <div class="card-body">
           <h4><i class="fas fa-table"></i> Registro de pedidos</h4>
@@ -21,12 +21,12 @@
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Nº de pedido</th>
-                  <th scope="col">Fecha de pedido</th>
+                  <!-- <th scope="col">Fecha de pedido</th> -->
                   <th scope="col">Fecha de entrega</th>
                   <th scope="col">Gastos de envío</th>
                   <th scope="col">Estado</th>
-                  <th scope="col">Entregado</th>
-                  <th scope="col">Sub Total</th>
+                  <!-- <th scope="col">Entregado</th> -->
+                  <!-- <th scope="col">Sub Total</th> -->
                   <th scope="col">Monto Total</th>
                   <th scope="col">Editar</th>
                   <th scope="col">Eliminar</th>
@@ -36,14 +36,14 @@
                 <tr *ngFor="let pedido of pedidos; let i = index" [attr.id]="pedido.id">
                   <th scope="col">{{i+1}}</th>
                   <td>{{pedido.nroPedido}}</td>
-                  <td>{{pedido.fechaPedido | date:'short'}}</td>
+                  <!-- <td>{{pedido.fechaPedido | date:'short'}}</td> -->
                   <td>{{pedido.fechaEstimadaEntrega | date:'short'}}</td>
                   <td>{{pedido.gastosEnvio}}</td>
                   <td>{{pedido.estado}}</td>
-                  <td>
-                    <fieldset disabled><input class="form-check-input" type="checkbox" value="pedido.entregado"></fieldset>
-                  </td>
-                  <td>{{pedido.subTotal}}</td>
+                  <!-- <td>
+                    <fieldset disabled><input [checked]="pedido.entregado == 1" class="form-check-input" type="checkbox"></fieldset>
+                  </td> -->
+                  <!-- <td>{{pedido.subTotal}}</td> -->
                   <td>{{pedido.montoTotal}}</td>
 
                   <td><button [routerLink]="['/pedidos/pedido', pedido.id]" routerLinkActive="router-link-active" type="button"
