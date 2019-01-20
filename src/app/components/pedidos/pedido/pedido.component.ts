@@ -165,6 +165,7 @@ export class PedidoComponent implements OnInit {
 
   calcularSaldo(allPedidos: Pedidoventa[]) {
     let pedidosCliente = allPedidos.filter(x => x.clienteId == this.getCliente.id);
+    this.getCliente.saldo = 0;
     for (let i = 0; i < pedidosCliente.length; i++) {
       if (pedidosCliente[i].estado == "Pendiente" || pedidosCliente[i].estado == "Enviado") {
         this.getCliente.saldo += pedidosCliente[i].montoTotal;
