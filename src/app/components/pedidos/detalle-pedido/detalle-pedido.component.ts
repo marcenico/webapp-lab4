@@ -7,6 +7,7 @@ import { Subject } from 'rxjs';
 import { StringsRegex } from 'src/app/wrappers/StringsRegex';
 import { ArticulosService } from 'src/app/services/articulos.service';
 import { PedidoComponent } from '../pedido/pedido.component';
+import { ArticulosComponent } from '../../articulos/articulos.component';
 
 @Component({
     selector: 'app-detalle-pedido',
@@ -19,6 +20,7 @@ export class DetallePedidoComponent implements OnInit {
     showForm: boolean = false;
     id: string;
     updateId: string = '';
+    searchTerm: any = '';
 
     dtOptions: DataTables.Settings = {};
     dtTrigger: Subject<any> = new Subject();
@@ -26,7 +28,9 @@ export class DetallePedidoComponent implements OnInit {
 
     detalles: Array<Pedidoventadetalle> = [];
     action: string;
+    articuloSeleccionado: string = "Seleccionar Articulo";
     private articulos: Articulo[] = [];
+    private auxArticulos: Articulo[] = [];
     private detalle: Pedidoventadetalle;
     private aux: Pedidoventadetalle = new Pedidoventadetalle();
 
@@ -42,7 +46,7 @@ export class DetallePedidoComponent implements OnInit {
             .subscribe(parametros => {
 
                 this.articuloService.getAll()
-                    .subscribe(data => this.articulos = data);
+                    .subscribe(data => this.auxArticulos = this.articulos = data);
 
                 this.id = parametros['id'];
                 if (this.id === "new") {
@@ -72,7 +76,8 @@ export class DetallePedidoComponent implements OnInit {
             cantidad: new FormControl('', [Validators.required, Validators.pattern(StringsRegex.greaterThanZero)]),
             descuento: new FormControl('', [Validators.required, Validators.pattern(StringsRegex.percentage)]),
             subTotal: new FormControl('', [Validators.required]),
-            articulo: new FormControl('', [Validators.required])
+            articulo: new FormControl('', [Validators.required]),
+            searchTerm: new FormControl('', [])
 
         })
     }
@@ -104,7 +109,10 @@ export class DetallePedidoComponent implements OnInit {
 
     private setSelectedArticulo(articulo: Articulo) {
         if (articulo != null) {
+            this.articuloSeleccionado = articulo.denominacion;
             this.dForma.get('articulo').setValue(articulo.denominacion);
+            this.detalle.articuloId = this.getArticulo.id;
+            this.calculateSubtotal();
         } else {
             this.dForma.get('articulo').setValue(null);
         }
@@ -155,10 +163,8 @@ export class DetallePedidoComponent implements OnInit {
         if (this.updateId != '') {
             this.aux = this.detalles.find(x => x.id == parseInt(this.updateId));
             let index = this.detalles.indexOf(this.aux);
-            this.detalle.id = parseInt(this.updateId);
             this.detalles[index] = this.detalle;
         } else {
-            this.detalle.id = this.detalles.length + 1;
             this.detalles.push(this.detalle);
         }
         this.seeForm(false);
@@ -197,6 +203,10 @@ export class DetallePedidoComponent implements OnInit {
     volver() {
         this.router.navigate(['/pedidos'], { replaceUrl: true });
     }
+
+    setFilteredItems() {
+        this.auxArticulos = this.articulos.filter(x => x.denominacion.toLowerCase().includes(this.searchTerm.toLowerCase()));
+      }
 }
 
 class Lang {

@@ -150,12 +150,19 @@ export class PedidoComponent implements OnInit {
               this.calcularSaldo(allPedidos);
               this.clienteService.update(this.getCliente, this.getCliente.id.toString())
                 .subscribe(() => {
+                  console.log("Detalles para actualizar", this.detalles);
                   for (let i = 0; i < this.detalles.length; i++) {
-                    this.pedidosService.updateDetalles(this.detalles[i])
-                      .subscribe(() => {
-                        this.router.navigate(['/pedidos'], { replaceUrl: true });
-                      }, error => console.log(error));
+                    if (undefined === this.detalles[i].id) {
+                      this.pedidosService.createDetalle(data.id, this.detalles[i])
+                      .subscribe(() => console.log("Es un pedido nuevo"))
+                    } else {
+                      this.pedidosService.updateDetalles(this.detalles[i])
+                        .subscribe(data => {
+                          console.log("Detalle actualizado ", data)
+                        }, error => console.log(error));
+                    }
                   }
+                  this.router.navigate(['/pedidos'], { replaceUrl: true });
                 });
             });
 

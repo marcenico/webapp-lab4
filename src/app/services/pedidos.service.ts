@@ -36,6 +36,12 @@ export class PedidosService {
     return this.detalleApi.createMany(d)
   }
 
+  createDetalle(pedidoVentaId: number, d: Pedidoventadetalle): Observable<Pedidoventadetalle> {
+    d.pedidoVentaId = pedidoVentaId;
+    d.id = null;
+    return this.detalleApi.create(d);
+  }
+
   updateDetalles(d: Pedidoventadetalle): Observable<Pedidoventadetalle> {
     return this.detalleService.update(d);
   }

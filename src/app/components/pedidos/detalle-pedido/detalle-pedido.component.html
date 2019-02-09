@@ -21,7 +21,8 @@
           <h5 class="btn"><i class="fas fa-home"></i> Detalle de pedido</h5>
         </div>
         <div class="p-2">
-          <button type="button" (click)="seeForm(true);" class="btn btn-outline-warning"><i class="fas fa-plus"></i></button>
+          <button type="button" (click)="seeForm(true);" class="btn btn-outline-warning"><i
+              class="fas fa-plus"></i></button>
         </div>
       </div>
 
@@ -32,10 +33,12 @@
           <!-- Cantidad -->
           <div class="form-group col-3">
             <label for="cantidad">Cantidad</label>
-            <input type="number" class="form-control text-center" id="cantidad" placeholder="0" formControlName="cantidad"
-              [(ngModel)]="detalle.cantidad" (keyup)="calculateSubtotal()" (click)="calculateSubtotal()">
+            <input type="number" class="form-control text-center" id="cantidad" placeholder="0"
+              formControlName="cantidad" [(ngModel)]="detalle.cantidad" (keyup)="calculateSubtotal()"
+              (click)="calculateSubtotal()">
 
-            <div class="alert alert-warning" *ngIf="dForma.get('cantidad').errors?.required && dForma.get('cantidad').dirty">
+            <div class="alert alert-warning"
+              *ngIf="dForma.get('cantidad').errors?.required && dForma.get('cantidad').dirty">
               * Este campo es requerido
             </div>
 
@@ -50,7 +53,8 @@
             <input type="number" class="form-control text-center" id="descuento" formControlName="descuento"
               [(ngModel)]="detalle.porcentajeDescuento" (keyup)="calculateSubtotal()" (click)="calculateSubtotal()">
 
-            <div class="alert alert-warning" *ngIf="dForma.get('descuento').errors?.required && dForma.get('descuento').dirty">
+            <div class="alert alert-warning"
+              *ngIf="dForma.get('descuento').errors?.required && dForma.get('descuento').dirty">
               * Este campo es requerido
             </div>
 
@@ -62,20 +66,56 @@
 
           <!-- Articulo -->
           <div class="form-group col">
-            <label for="articulo">Articulo</label>
-            <select class="custom-select" id="articulo" formControlName="articulo" (change)="selectChange()">
+            <label for="articulo">Articulo</label><br>
+            <!--  <select class="custom-select" id="articulo" formControlName="articulo" (change)="selectChange()">
+              <option><input class="form-control form-control-sm" type="text" placeholder=".form-control-sm"></option>
               <option *ngFor="let articulo of articulos" [ngValue]="articulo.denominacion">{{articulo.denominacion}}</option>
-            </select>
+            </select> -->
+            <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#articulosModal">
+              {{articuloSeleccionado}}
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade bd-example-modal-sm" id="articulosModal" tabindex="-1" role="dialog"
+              aria-labelledby="articulosModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="articulosModalLabel">Lista de articulos</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Buscar..." [(ngModel)]="searchTerm"
+                      (input)="setFilteredItems()" formControlName="searchTerm"><br>
+                    <div class="list-group">
+                      <div *ngFor="let articulo of auxArticulos; let i = index">
+                        <button type="button" class="list-group-item list-group-item-action"
+                          (click)="setSelectedArticulo(articulo)" [ngClass]="{'active': articuloSeleccionado == articulo.denominacion}" >{{i+1}}.
+                          {{articulo.denominacion}}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- Subtotal -->
           <div class="form-group col-2">
             <label for="subTotal">Subtotal</label>
             <fieldset disabled>
-              <input type="text" class="form-control text-right" id="subTotal" formControlName="subTotal" [(ngModel)]="detalle.subTotal">
+              <input type="text" class="form-control text-right" id="subTotal" formControlName="subTotal"
+                [(ngModel)]="detalle.subTotal">
             </fieldset>
 
-            <div class="alert alert-warning" *ngIf="dForma.get('subTotal').errors?.required && dForma.get('subTotal').dirty">
+            <div class="alert alert-warning"
+              *ngIf="dForma.get('subTotal').errors?.required && dForma.get('subTotal').dirty">
               * Este campo es requerido
             </div>
           </div>
@@ -143,9 +183,10 @@
         </div>
       </div>
 
-      
+
       <!-- NUEVO PEDIDO -->
-      <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="articulosModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
 
